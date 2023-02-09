@@ -1,4 +1,4 @@
-const Routine = require('../model/Routine')
+const Routine = require('../../model/Routine')
 const deleteRoutine = async(req,res)=>{    
     try{
         if(!req.params.idRoutine){ 

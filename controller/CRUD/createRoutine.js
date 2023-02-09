@@ -1,4 +1,4 @@
-const Routine = require('../model/Routine')
+const Routine = require('../../model/Routine')
 const createRoutineController = async(req,res) =>{
     const {idUser,intervals} = req.body       
     const routineModel = Routine({idUser,intervals})

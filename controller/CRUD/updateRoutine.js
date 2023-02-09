@@ -1,4 +1,4 @@
-const Routine = require('../model/Routine')
+const Routine = require('../../model/Routine')
 const updateRoutine = async(req,res)=>{
     const {intervals} = req.body
     if(!req.params.idRoutine){return res.status(404).json('Parametro não informado')}
