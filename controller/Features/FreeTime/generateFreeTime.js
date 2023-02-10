@@ -12,6 +12,7 @@ const generateFreeTime = (intervals) => {
             auxInterval.splice(i+1, 0, newInterval)
         }
     }
+    
     return auxInterval
 }
 module.exports = generateFreeTime
