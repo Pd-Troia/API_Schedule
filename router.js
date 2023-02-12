@@ -3,7 +3,7 @@ const createRoutineController = require('./controller/CRUD/createRoutine')
 const deleteRoutine = require('./controller/CRUD/deleteRoutine')
 const getRoutineController = require('./controller/CRUD/getRoutineController')
 const updateRoutine = require('./controller/CRUD/updateRoutine')
-const getFreeTimeController = require('./controller/Features/FreeTime/getFreeTimeController')
+const getFreeTimeController = require('./controller/Features/free_time/getFreeTimeController')
 
 const router = express.Router()
 
