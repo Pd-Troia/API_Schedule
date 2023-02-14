@@ -1,12 +1,16 @@
 // @Params 
 // firstInterval = [intialNumber]
 // secondInterval =  [endingNumber]
-// return true if first at least contains one part of second
+// return 1 if the second interval initial has contained in first interval
+// return 2 if the second interval ending has contained in first interval
+//return 0 if the second interval initial, ending has no contained in the first interval
 const partIsContained = (firstInterval,secondInterval)=>{
-    const verifySecondInicial = 
+    const verifyInicial = 
     firstInterval.initial <= secondInterval.initial && firstInterval.ending >= secondInterval.initial
-    const verifySecondEnding = 
+    const verifyEnding = 
     firstInterval.initial <= secondInterval.ending && firstInterval.ending >= secondInterval.ending
-    return (verifySecondInicial || verifySecondEnding) 
+    if(verifyInicial){return 1}
+    if(verifyEnding){return 2}
+    return 0
 }
 module.exports = partIsContained;
