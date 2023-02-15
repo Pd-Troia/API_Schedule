@@ -1,9 +1,9 @@
 const communInterval = require("./communInterval");
-
+// return a commun interval of all arrays
 const finalCommunInterval = (array)=>{    
-    let finalInterval = communInterval(array[0],array[1])
-    for(i=0; i<array.lenght-1;i++){
-        finalInterval = communInterval(finalCommunInterval,array[i+2])
+    let finalInterval = communInterval(array[0],array[1])    
+    for(let i=0; i<array.length-2;i++){
+        finalInterval = communInterval(finalInterval,array[i+2])
     }  
     return finalInterval
 }

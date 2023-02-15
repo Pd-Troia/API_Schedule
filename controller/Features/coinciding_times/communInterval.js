@@ -1,11 +1,13 @@
 const isContained = require("./isContained");
 const partIsContained = require("./partIsContained");
-
+// return a commum interval of 2 intervals
 const communInterval = (firstIntervalArray,secondIntervalArray)=>{    
     const output = []      
-    let contained = false
-    firstIntervalArray.forEach(firstInterval => {
-        secondIntervalArray.forEach(secondInterval => {
+    let contained = false    
+    for(let i=0;i<firstIntervalArray.length;i++){
+        const firstInterval = firstIntervalArray[i]
+        for(let j=0;j<secondIntervalArray.length;j++) {
+            const secondInterval = secondIntervalArray[j]
             if(isContained(firstInterval,secondInterval)){
                 output.push(secondInterval)
                 contained = true;
@@ -34,8 +36,8 @@ const communInterval = (firstIntervalArray,secondIntervalArray)=>{
                     output.push(newInterval)
                 }         
             }        
-        });
-    });      
+        };
+    };      
     return output  
 }
 module.exports = communInterval;

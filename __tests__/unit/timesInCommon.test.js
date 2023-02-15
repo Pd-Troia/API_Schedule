@@ -1,19 +1,9 @@
 const isContained = require('../../controller/Features/coinciding_times/isContained')
 const partIsContained = require('../../controller/Features/coinciding_times/partIsContained')
-const shortInterval = require('../../controller/Features/coinciding_times/shortInterval')
 const intervalsOnCommun = require('../../controller/Features/coinciding_times/intervalsOnCommun');
 const filterLabelIntervals = require('../../controller/Features/coinciding_times/filterLabelIntervals');
 const communInterval = require('../../controller/Features/coinciding_times/communInterval');
-describe("TimesInCommon",()=>{
-    it("shoud return smallest range",()=>{        
-        const intervalArray = 
-        [
-            {initial:0, ending:20, label:"Running" },
-            {initial:16, ending:60, label:"Buying Food"},
-            {initial:70, ending:110, label:"Free Time"}
-        ]
-        expect(shortInterval(intervalArray)).toEqual({initial:0, ending:20, label:"Running" });
-    });
+describe("TimesInCommon",()=>{    
     it("should return true if first interval contais the second interval",()=>{
         const firstInterval = {initial:0, ending:20, label:"Running" }
         const secondInterval = {initial:10, ending:15, label:"Breakfast" }
@@ -58,10 +48,30 @@ describe("TimesInCommon",()=>{
                     {initial:1300,ending:1500,label:"exercitar"},
                     {initial:1700,ending:2000,label:"dormir"}
                 ]
-            }            
+            },
+            {intervals:
+                [
+                    {initial:0,ending:70,label:"acordar"},
+                    {initial:70,ending:250,label:"tomar café"},
+                    {initial:250,ending:300,label:"exercitar"},
+                    {initial:300,ending:550,label:"tempo livre"},
+                    {initial:600,ending:1500,label:"exercitar"},
+                    {initial:1500,ending:2000,label:"dormir"},
+                ]
+            }, 
+            {intervals:
+                [
+                    {initial:0,ending:70,label:"acordar"},
+                    {initial:70,ending:250,label:"tomar café"},
+                    {initial:250,ending:500,label:"exercitar"},
+                    {initial:500,ending:600,label:"tempo livre"},
+                    {initial:600,ending:1500,label:"exercitar"},
+                    {initial:1500,ending:2000,label:"dormir"},
+                ]
+            }                       
         ]
         const label = "tempo livre"
-        expect(intervalsOnCommun(routine,label).toEqual({initial:400,ending:600,label:"tempo livre"}))
+        expect(intervalsOnCommun(routine,label)).toEqual([{initial:500,ending:550,label:"tempo livre"}])
     }) 
     it('should return all arrays filtered by label', ()=>{
         const tempoLivre = "tempo livre"

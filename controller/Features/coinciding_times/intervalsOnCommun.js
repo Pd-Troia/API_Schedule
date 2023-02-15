@@ -6,19 +6,22 @@ const partIsContained = require("./partIsContained")
 //@params
 //@param multiplesRoutines = [[{}]] SomePeoplesIntervals
 //@param label to compair of multiple people
+// returns an array of intervalsOnCommun with same label
 const intervalsOnCommun = (multipleRoutines,label)=>{  
     
     const filteredArray = filterLabelIntervals(multipleRoutines,label)    
     const firstRoutine = filteredArray.shift()
-    intervalsFinal = []
-    intervalsTemp = []
-    firstRoutine.intervals.foreach((intervalFirstRoutine)=>{        
-        intervalsTemp.push(intervalFirstRoutine)
+    const intervalsFinal = []
+    const intervalsTemp = []    
+    for(let iFirst=0;iFirst<firstRoutine.length;iFirst++){    
+        intervalFirstRoutine = firstRoutine[iFirst]
+        const correctPush = !(intervalFirstRoutine instanceof Array)?[intervalFirstRoutine]:intervalFirstRoutine
+        intervalsTemp.push(correctPush)
         for(let i = 0;i<filteredArray.length;i++){ // runs for routines
             visitedRoutine = filteredArray[i]
-            intervalsFounded = []
+            const intervalsFounded = []
             for(let j = 0;j<visitedRoutine.length;j++){ // runs for intervals in routine
-                visitedInterval = visitedInterval[j]
+                let visitedInterval = visitedRoutine[j]
                 // verify if one contains other                
                 const contained=
                 isContained(intervalFirstRoutine,visitedInterval) || isContained(visitedInterval,intervalFirstRoutine)
@@ -38,10 +41,13 @@ const intervalsOnCommun = (multipleRoutines,label)=>{
             }
         }
         // process intervals on common
-        if(intervalsTemp.length === filteredArray+1 ){
-            intervalFinal.push(finalCommunInterval(intervalsTemp))
+        if(intervalsTemp.length === filteredArray.length+1 ){
+            const finalIntervals = finalCommunInterval(intervalsTemp)
+            for(let iFinal=0;iFinal<finalIntervals.length;iFinal++){
+                intervalsFinal.push(finalIntervals[iFinal])
+            }
         }
-    })
-    return intervalFinal
+    }
+    return intervalsFinal
 }
 module.exports = intervalsOnCommun
