@@ -1,7 +1,9 @@
 const Routine = require('../../model/Routine')
+const generateFreeTime = require('../Features/free_time/generateFreeTime')
 const createRoutineController = async(req,res) =>{
     const {idUser,intervals} = req.body       
-    const routineModel = Routine({idUser,intervals})
+    const intervalsWithSpace = generateFreeTime(intervals)
+    const routineModel = Routine({idUser,intervalsWithSpace})
     try{
         await routineModel.save()
         res.status(200).json({msg:"Rotina criada com sucesso"})

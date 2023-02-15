@@ -1,8 +1,8 @@
 const express = require('express')
-const createRoutineController = require('./controller/CRUD/createRoutine')
-const deleteRoutine = require('./controller/CRUD/deleteRoutine')
+const createRoutineController = require('./controller/CRUD/createRoutineController')
+const deleteRoutineController = require('./controller/CRUD/deleteRoutineController')
 const getRoutineController = require('./controller/CRUD/getRoutineController')
-const updateRoutine = require('./controller/CRUD/updateRoutine')
+const updateRoutineController = require('./controller/CRUD/updateRoutineController')
 const getFreeTimeController = require('./controller/Features/free_time/getFreeTimeController')
 
 const router = express.Router()
@@ -17,10 +17,10 @@ router.post('/routine', createRoutineController)
 router.get('/routine/:idUser', getRoutineController)
 
 //remove day schedule
-router.delete('/routine/:idRoutine', deleteRoutine)
+router.delete('/routine/:idRoutine', deleteRoutineController)
 
 //Update Routine
-router.put('/routine/:idRoutine',updateRoutine)
+router.put('/routine/:idRoutine',updateRoutineController)
 
 //Get free times 
 router.get('/freetime/:idRoutine', getFreeTimeController)
