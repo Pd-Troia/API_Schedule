@@ -12,10 +12,11 @@ const generateFreeTime = (intervals) => {
             }
             auxInterval.splice(i+1, 0, newInterval)
         }
-        if(i === lastIterator && nextInterval.ending < 86400000){            
+        const oneDayInMiliSeconds = 86400000
+        if(i === lastIterator && nextInterval.ending < oneDayInMiliSeconds){            
             const newInterval = {
                 initial: nextInterval.ending,
-                ending: 86400000,
+                ending: oneDayInMiliSeconds,
                 label:"tempo livre"
             }
             auxInterval.push(newInterval)
