@@ -3,6 +3,7 @@ const createRoutineController = require('./controller/CRUD/createRoutineControll
 const deleteRoutineController = require('./controller/CRUD/deleteRoutineController')
 const getRoutineController = require('./controller/CRUD/getRoutineController')
 const updateRoutineController = require('./controller/CRUD/updateRoutineController')
+const getCoincidingTimesController = require('./controller/Features/coinciding_times/getCoindingTimesController')
 const getFreeTimeController = require('./controller/Features/free_time/getFreeTimeController')
 
 const router = express.Router()
@@ -24,5 +25,8 @@ router.put('/routine/:idRoutine',updateRoutineController)
 
 //Get free times 
 router.get('/freetime/:idRoutine', getFreeTimeController)
+
+//get coincident routime times
+router.get('/coincident/:idsRoutine', getCoincidingTimesController)
 
 module.exports = router

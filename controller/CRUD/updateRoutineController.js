@@ -1,9 +1,10 @@
 const Routine = require('../../model/Routine')
+const generateFreeTime = require('../Features/free_time/generateFreeTime')
 const updateRoutine = async(req,res)=>{
     const {intervals} = req.body
     if(!req.params.idRoutine){return res.status(404).json('Parametro não informado')}
-    try{
-        const query = await Routine.findByIdAndUpdate({_id: req.params.idRoutine},{intervals: intervals})
+    try{        
+        const query = await Routine.findByIdAndUpdate({_id: req.params.idRoutine},{intervals: generateFreeTime(intervals)})
         return  query 
         ? res.status(200).json({msg:'Rotina atualizada com sucesso'})
         : res.status(404).json({msg:'Rotina não encontrada'})
