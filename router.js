@@ -1,10 +1,5 @@
 const express = require('express')
-const createRoutineController = require('./controller/CRUD/createRoutineController')
-const deleteRoutineController = require('./controller/CRUD/deleteRoutineController')
-const getRoutineController = require('./controller/CRUD/getRoutineController')
-const updateRoutineController = require('./controller/CRUD/updateRoutineController')
-const getCoincidingTimesController = require('./controller/Features/coinciding_times/getCoindingTimesController')
-const getFreeTimeController = require('./controller/Features/free_time/getFreeTimeController')
+const routineController = require('./controller/RoutineController')
 
 const router = express.Router()
 
@@ -12,21 +7,18 @@ const router = express.Router()
 router.get('/',(req,res)=> res.status(200).json({msg:'api working'}))
 
 //create day schedule
-router.post('/routine', createRoutineController)
+router.post('/routine', routineController.createRoutine)
 
 //get day schedule 
-router.get('/routine/:idUser', getRoutineController)
+router.get('/routine/:idUser', routineController.getRoutine)
 
 //remove day schedule
-router.delete('/routine/:idRoutine', deleteRoutineController)
+router.delete('/routine/:idRoutine', routineController.deleteRoutine)
 
 //Update Routine
-router.put('/routine/:idRoutine',updateRoutineController)
-
-//Get free times 
-router.get('/freetime/:idRoutine', getFreeTimeController)
+router.put('/routine/:idRoutine', routineController.updateRoutine)
 
 //get coincident routime times
-router.get('/coincident/:idsRoutine', getCoincidingTimesController)
+router.get('/coincident/:idsRoutine', routineController.getCoincidingTimes)
 
 module.exports = router
