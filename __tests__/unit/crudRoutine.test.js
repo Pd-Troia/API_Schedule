@@ -1,4 +1,4 @@
-const generateFreeTime = require('../../controller/Features/free_time/generateFreeTime')
+const generateFreeTime = require('../../service/generate_free_time/generateFreeTime')
 describe("Unit tests for routine CRUD",()=>{
     it("Must return an array filled a 'tempos livres' on free time",()=>{
         const routine =
@@ -17,7 +17,7 @@ describe("Unit tests for routine CRUD",()=>{
                     "label": "fumadno"
                 },
                 {
-                    "initial": 110,
+                    "initial": 130,
                     "ending": 150000,
                     "label": "birigando"
                 }
@@ -26,33 +26,31 @@ describe("Unit tests for routine CRUD",()=>{
 		}        
         const expectRoutine = 
         [
-        {
-            "initial": 0,
-            "ending": 10,
-            "label": "acordando",
-            
-        },
-        {
-            "initial": 10,
-            "ending": 20,
-            "label": "tomando café",
-            
-        },
-        {
-            "initial": 20,
-            "ending": 40,
-            "label": "tempo livre",					
-        },
-        {
-            "initial": 40,
-            "ending": 50,
-            "label": "drinking with friends",					
-        },
-        {
-            "initial": 50,
-            "ending": 86400000,
-            "label": "tempo livre",					
-        }
+            {
+                "initial": 0,
+                "ending": 30,
+                "label": "bebendo"
+            },
+            {
+                "initial":30,
+                "ending": 50,
+                "label": "tempo livre"
+            },            
+            {
+                "initial":50,
+                "ending": 130,
+                "label": "fumadno"
+            },
+            {
+                "initial": 130,
+                "ending": 150000,
+                "label": "birigando"
+            },
+            {
+                "initial": 150000,
+                "ending": 86400000,
+                "label": "tempo livre"
+            }
         ]              
         expect(generateFreeTime(routine.intervals)).toEqual(expectRoutine)
     })

@@ -1,8 +1,8 @@
-const isContained = require('../../controller/Features/coinciding_times/isContained')
-const partIsContained = require('../../controller/Features/coinciding_times/partIsContained')
-const intervalsOnCommun = require('../../controller/Features/coinciding_times/intervalsOnCommun');
-const filterLabelIntervals = require('../../controller/Features/coinciding_times/filterLabelIntervals');
-const communInterval = require('../../controller/Features/coinciding_times/communInterval');
+const isContained = require('../../service/coindicent_times/isContained')
+const partIsContained = require('../../service/coindicent_times/partIsContained')
+const intervalsOnCommun = require('../../service/coindicent_times/intervalsOnCommun');
+const filterLabelIntervals = require('../../service/coindicent_times/filterLabelIntervals');
+const communInterval = require('../../service/coindicent_times/communInterval');
 describe("TimesInCommon",()=>{    
     it("should return true if first interval contais the second interval",()=>{
         const firstInterval = {initial:0, ending:20, label:"Running" }
