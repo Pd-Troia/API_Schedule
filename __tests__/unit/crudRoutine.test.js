@@ -6,22 +6,22 @@ describe("Unit tests for routine CRUD",()=>{
 			"_id": "63e3affda39984e73a434e62",
 			"idUser": 1,
 			"intervals": [
-				{
-					"initial": 0,
-					"ending": 10,
-					"label": "acordando",					
-				},
-				{
-					"initial": 10,
-					"ending": 20,
-					"label": "tomando café",					
-				},
                 {
-					"initial": 40,
-					"ending": 50,
-					"label": "drinking with friends",					
-				}
-			],
+                    "initial": 0,
+                    "ending": 30,
+                    "label": "bebendo"
+                },
+                {
+                    "initial":50,
+                    "ending": 130,
+                    "label": "fumadno"
+                },
+                {
+                    "initial": 110,
+                    "ending": 150000,
+                    "label": "birigando"
+                }
+            ],
 			"__v": 0
 		}        
         const expectRoutine = 
