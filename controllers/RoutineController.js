@@ -1,6 +1,6 @@
 const routineModel = require('../models/routineModel')
-const generateFreeTime = require('../service/generate_free_time/generateFreeTime')
-const intervalsOnCommun = require('../service/coindicent_times/intervalsOnCommun')
+const generateFreeTime = require('../services/generate_free_time/generateFreeTime')
+const intervalsOnCommun = require('../services/coindicent_times/intervalsOnCommun')
 
 const createRoutine = async(req,res) =>{
     const {idUser,intervals} = req.body  
