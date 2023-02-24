@@ -1,5 +1,6 @@
 const express = require('express')
 const routineController = require('./controllers/RoutineController')
+const validateMiddleware = require('./middlewares/validatorRoutineMiddleware')
 
 const router = express.Router()
 
@@ -7,16 +8,16 @@ const router = express.Router()
 router.get('/',(req,res)=> res.status(200).json({msg:'api working'}))
 
 //create day schedule
-router.post('/routine', routineController.createRoutine)
+router.post('/routine',  validateMiddleware.validatePost, routineController.createRoutine)
 
 //get day schedule 
-router.get('/routine/:idUser', routineController.getRoutine)
+router.get('/routine/:idUser',validateMiddleware.validateGet,routineController.getRoutine)
 
 //remove day schedule
-router.delete('/routine/:idRoutine', routineController.deleteRoutine)
+router.delete('/routine/:idRoutine', validateMiddleware.validateDelete,routineController.deleteRoutine)
 
 //Update Routine
-router.put('/routine/:idRoutine', routineController.updateRoutine)
+router.put('/routine/:idRoutine', validateMiddleware.validatePut,routineController.updateRoutine)
 
 //get coincident routime times
 router.get('/coincident/:idsRoutine', routineController.getCoincidingTimes)
