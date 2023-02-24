@@ -21,6 +21,14 @@ const generateFreeTime = (intervals) => {
             }
             auxInterval.push(newInterval)
         }
+        if(i === 0 && interval.initial != 0){            
+            const newInterval = {
+                initial: 0,
+                ending: interval.initial,
+                label:"tempo livre"
+            }
+            auxInterval.unshift(newInterval)
+        }
     }
     
     return auxInterval

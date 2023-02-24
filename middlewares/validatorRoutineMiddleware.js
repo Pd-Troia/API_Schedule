@@ -2,8 +2,7 @@ const routineValidator = require('../services/validations/routineValidator')
 const routineModel = require('../models/routineModel')
 
 const validateDelete =async (req,res,next) =>{
-    const idRoutine = req.params.idRoutine
-    console.log(idRoutine)
+    const idRoutine = req.params.idRoutine    
     if(!idRoutine){
         return res.status(404).json({msg:'Id routine não enviado'})
     }    
