@@ -20,6 +20,6 @@ router.delete('/routine/:idRoutine', validateMiddleware.validateDelete,routineCo
 router.put('/routine/:idRoutine', validateMiddleware.validatePut,routineController.updateRoutine)
 
 //get coincident routime times
-router.get('/coincident/:idsRoutine', routineController.getCoincidingTimes)
+router.get('/coincident/:idsRoutine',validateMiddleware.validateGetCoincidentTimes, routineController.getCoincidingTimes)
 
 module.exports = router
