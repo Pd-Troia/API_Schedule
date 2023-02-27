@@ -27,12 +27,9 @@ const createRoutine = async (idUser,intervals) =>{
     }
 }
 const deleteRoutine = async(idRoutine) =>{
-    try{
-        if(mongoose.Types.ObjectId.isValid(idRoutine)){
-            const deletedRoutine = await Routine.deleteOne({_id:idRoutine})
-            return deletedRoutine     
-        }
-        return false   
+    try{        
+        const deletedRoutine = await Routine.deleteOne({_id:idRoutine})
+        return deletedRoutine        
     }catch(err){
         console.log(err)
         throw new Error('Error to delete a routine')
@@ -41,19 +38,16 @@ const deleteRoutine = async(idRoutine) =>{
 const getRoutine = async (idUser)=>{
     try{
         const routine = await Routine.find({idUser})
-    return await routine
+        return await routine
     }catch(err){
         console.log(err)
         throw new Error('Error to get routine by Id User')
     }
 }
 const getRoutineByIdRoutine = async (idRoutine)=>{
-    try{        
-        if(mongoose.Types.ObjectId.isValid(idRoutine)){
-            const routine = await Routine.find({_id:idRoutine}).then((rout)=>rout)        
-            return routine        
-        }
-        return false
+    try{     
+        const routine = await Routine.find({_id:idRoutine}).then((rout)=>rout)        
+        return routine 
     }catch(err){
         console.log(err)
         throw new Error('Error to get routine by Id Routine')

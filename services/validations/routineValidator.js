@@ -44,7 +44,23 @@ const verifyConditions = (intervals)=>{
     }
     return errors   
 }
+const notFoundRoutine = (routines, listRoutines) =>{
+    const routinesNotFounded = []
+    for(let i = 0;i<routines.length;i++){
+        const founded = false 
+        for(let j = 0;j<listRoutines.length;j++){
+            if(routine[i]._id === listRoutines[j]){
+                founded = true
+            }
+        }
+        if(!founded){
+            routinesNotFounded.push(routine[i]._id)
+        }
+    }
+    return routinesNotFounded
+}
 
 module.exports = {
-    verifyConditions
+    verifyConditions,
+    notFoundRoutine
 }

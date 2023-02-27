@@ -12,7 +12,7 @@ const communInterval = (firstIntervalArray,secondIntervalArray)=>{
                 output.push(secondInterval)
                 contained = true;
             }
-            if(isContained(secondInterval,firstInterval)){
+            if(isContained(secondInterval,firstInterval) && !contained){
                 output.push(firstInterval)
                     contained = true                
             }            
