@@ -1,8 +1,7 @@
 const express = require('express')
 const routineController = require('./controllers/RoutineController')
 const validateMiddleware = require('./middlewares/validatorRoutineMiddleware')
-
-const router = express.Router()
+const userGroupController = require('./controllers/userGroupController')
 
 //default route
 router.get('/',(req,res)=> res.status(200).json({msg:'api working'}))
@@ -22,4 +21,23 @@ router.put('/routine/:idRoutine', validateMiddleware.validatePut,routineControll
 //get coincident routime times
 router.get('/coincident/:idsRoutine',validateMiddleware.validateGetCoincidentTimes, routineController.getCoincidingTimes)
 
+// UserGroup Routes
+
+//Create Group
+router.post('/usergroup/creategroup', userGroupController.creteUserGroup)
+
+// Get User Group
+router.get('/usergroup/getUserGroup/:idUser', userGroupController.getUserGroup )
+
+//Update Admin User Group
+router.patch('/usergroup/creategroup', userGroupController.getUserGroup )
+
+//Delete User Group
+router.delete('/usergroup/deletegroup/:idUserGroup', userGroupController.deleteUserGroup)
+
+//Insert Member in Group
+router.patch('/usergroup/insertmember/:idUserGroup', userGroupController.insertMember)
+
+//Remove Member in group
+router.patch('/usergroup/deletemember/:idUserGroup', userGroupController.deleteMember)
 module.exports = router
