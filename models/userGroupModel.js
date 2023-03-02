@@ -39,7 +39,7 @@ const createUserGroup = async(idAdmin, idRoutineAdmin)=>{
 }
 const deleteUserGroup = async(idUserGroup) =>{
     try{
-        const query = await userGroup.findByIdAndDelete(idUserGroup)
+        const query = await userGroup.findByIdAndDelete({_id:idUserGroup})
         return query 
     }catch(err){
         console.log(err)
@@ -66,16 +66,17 @@ const updateAdminUserGroup = async(idUserGroup, idAdmin)=>{
 }
 const insertMember = async(idUser,idRoutine,idUserGroup)=>{
     try{
-        await userGroup.updateOne({_id:idUserGroup},{$push:{members:{idUser, idRoutine}}})
-    
-    }catch(err){
+        const query = await userGroup.updateOne({_id:idUserGroup},{$push:{members:{idUser: idUser, idRoutine:idRoutine}}})        
+        return query.matchedCount > 0
+    }catch(err){    
         console.log(err)
         throw new Error("Erro to insert a new member on UserGroup")
     }
 }
 const removeMember = async(idUser, idUserGroup)=>{
     try{
-        await userGroup.updateOne({_id:idUserGroup}, {$pull: {idUser}})        
+        const query = await userGroup.updateOne({_id:idUserGroup}, {$pull: {members:{idUser:idUser}}})    
+        console.log(query)    
     }catch(err){
         console.log(err)
         throw new Error("Erro to insert a new member on UserGroup")

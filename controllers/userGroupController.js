@@ -21,7 +21,7 @@ const getUserGroup = async(req,res) =>{
     }
 }
 const deleteUserGroup = async (req,res) =>{
-    const {idUserGroup} = req.params.idUserGroup
+    const idUserGroup = req.params.idUserGroup    
     try{
         await userGroupModel.deleteUserGroup(idUserGroup)
         return res.status(200).json({msg:"Grupo deletado com sucesso"})
@@ -43,11 +43,15 @@ const updateAdminUserGroup = async(req,res) =>{
 }
 
 const insertMember = async(req,res) =>{
-    const idUserGroup = req.params.IdUserGroup
+    const idUserGroup = req.params.idUserGroup
     const {idUser,idRoutine} = req.body
     try{
-       await userGroupModel.insertMember(idUser,idRoutine,idUserGroup)
-       return res.status(200).json({msg:'Membro inserido com sucesso'})
+        const isModifield = await userGroupModel.insertMember(idUser,idRoutine,idUserGroup)       
+        if(isModifield){
+            return res.status(200).json({msg:'Membro inserido com sucesso'})            
+        }else{
+            return res.status(200).json({msg:'Sem sucesso ao inserir o membro'})
+        }
     }catch(err){
         console.log(err)
         return res.status(400).json({msg:"Ocorreu um erro ao tentar inserir um usuário ao userGroup"})
