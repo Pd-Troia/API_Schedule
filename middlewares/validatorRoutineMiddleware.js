@@ -4,7 +4,7 @@ const routineModel = require('../models/routineModel')
 
 const validateDelete =async (req,res,next) =>{
     const idRoutine = req.params.idRoutine    
-    if(mongoose.Types.ObjectId.isValid(idRoutine)){
+    if(!mongoose.Types.ObjectId.isValid(idRoutine)){
         return res.status(400).json({msg:"O id fornecido para deletar é inválido"})
     }
     if(!idRoutine){
@@ -22,7 +22,7 @@ const validateGet = async(req,res,next)=>{
     if(!idUser){
         return res.status(404).json({msg:'usuário não encontrado'})
     }
-    if(mongoose.Types.ObjectId.isValid(idUser)){
+    if(!mongoose.Types.ObjectId.isValid(idUser)){
         return res.status(400).json({msg:"O id fornecido para deletar é inválido"})
     }
     next()
@@ -32,7 +32,7 @@ const validatePost = async(req,res,next) => {
     if(!idUser){
         return res.status(404).json({msg:"idUser não informado"})
     }
-    if(mongoose.Types.ObjectId.isValid(idUser)){
+    if(!mongoose.Types.ObjectId.isValid(idUser)){
         return res.status(400).json({msg:"O idUser é inválido"})
     }
     const errors = routineValidator.verifyConditions(intervals)

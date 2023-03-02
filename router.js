@@ -3,6 +3,8 @@ const routineController = require('./controllers/RoutineController')
 const validateMiddleware = require('./middlewares/validatorRoutineMiddleware')
 const userGroupController = require('./controllers/userGroupController')
 
+const router = express.Router()
+
 //default route
 router.get('/',(req,res)=> res.status(200).json({msg:'api working'}))
 
@@ -27,17 +29,18 @@ router.get('/coincident/:idsRoutine',validateMiddleware.validateGetCoincidentTim
 router.post('/usergroup/creategroup', userGroupController.creteUserGroup)
 
 // Get User Group
-router.get('/usergroup/getUserGroup/:idUser', userGroupController.getUserGroup )
-
-//Update Admin User Group
-router.patch('/usergroup/creategroup', userGroupController.getUserGroup )
+router.get('/usergroup/getusergroup/:idUser', userGroupController.getUserGroup )
 
 //Delete User Group
 router.delete('/usergroup/deletegroup/:idUserGroup', userGroupController.deleteUserGroup)
+
+//Update Admin User Group
+router.patch('/usergroup/updateadmin/:idUserGroup', userGroupController.updateAdminUserGroup )
 
 //Insert Member in Group
 router.patch('/usergroup/insertmember/:idUserGroup', userGroupController.insertMember)
 
 //Remove Member in group
 router.patch('/usergroup/deletemember/:idUserGroup', userGroupController.deleteMember)
+
 module.exports = router

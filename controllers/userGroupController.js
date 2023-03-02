@@ -1,4 +1,5 @@
 const userGroupModel = require('../models/userGroupModel')
+
 const creteUserGroup = async(req,res) =>{ 
     const {idAdmin,idRoutine} = req.body
     try{
@@ -10,7 +11,7 @@ const creteUserGroup = async(req,res) =>{
     }
 }
 const getUserGroup = async(req,res) =>{
-    const {idUser} = req.params.idUser
+    const idUser = req.params.idUser    
     try{
         const groups = await userGroupModel.getUserGroup(idUser)
         return res.status(200).json({groups})
@@ -30,9 +31,10 @@ const deleteUserGroup = async (req,res) =>{
     }
 }
 const updateAdminUserGroup = async(req,res) =>{
-    const {newidAdmin} = req.body
+    const idUserGroup = req.params.idUserGroup
+    const {newIdAdmin} = req.body
     try{
-        await userGroupModel.updateAdminUserGroup(newidAdmin)
+        await userGroupModel.updateAdminUserGroup(idUserGroup,newIdAdmin)
         return res.status(200).json({msg:"Admin alterado com sucesso"})
     }catch(err){
         console.log(err)
@@ -41,7 +43,8 @@ const updateAdminUserGroup = async(req,res) =>{
 }
 
 const insertMember = async(req,res) =>{
-    const {idUser,idRoutine,idUserGroup} = req.body
+    const idUserGroup = req.params.IdUserGroup
+    const {idUser,idRoutine} = req.body
     try{
        await userGroupModel.insertMember(idUser,idRoutine,idUserGroup)
        return res.status(200).json({msg:'Membro inserido com sucesso'})

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const schema = mongoose.Schema({
-    idUser: {type: mongoose.schema.Types.ObjectId, ref: "User"},
+    idUser: {type: mongoose.Types.ObjectId, ref: "User"},
     intervals: [{initial: Number, ending: Number, label: String}]
 })
 const Routine = mongoose.model("Routine", schema )

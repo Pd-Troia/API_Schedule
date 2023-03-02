@@ -1,20 +1,16 @@
 const mongoose = require('mongoose')
 const schema = mongoose.Schema({
-    admin: {type: mongoose.schema.Types.ObjectId, ref: "User"},
+    admin: {type: mongoose.Types.ObjectId, ref: "User"},
     members: [{
-        idUser: {type: mongoose.schema.Types.ObjectId, ref: "User"},
-        routineId: {type: mongoose.schema.Types.ObjectId,ref:"Routine"}
+        idUser: {type: mongoose.Types.ObjectId, ref: "User"},
+        routineId: {type: mongoose.Types.ObjectId,ref:"Routine"}
     }]
 })
 const userGroup = mongoose.model("UserGroup", schema )
 
 const getUserGroup = async(userId) => {
     try{
-        const groups = await userGroup.find({
-            members:[
-                {idUser:userId}
-            ]
-        })
+        const groups = await userGroup.find({ members: { $elemMatch: { idUser: userId } } })
         return groups
     }catch(err){
         console.log(err)
@@ -61,7 +57,7 @@ const updateMemberUserGroup = async(idUserGroup, members)=>{
 }
 const updateAdminUserGroup = async(idUserGroup, idAdmin)=>{
     try{
-        const query = await userGroup.findByIdAndUpdate(idUserGroup, {idAdmin})
+        const query = await userGroup.findByIdAndUpdate(idUserGroup, {admin:idAdmin})
         return query 
     }catch(err){
         console.log(err)
@@ -70,9 +66,8 @@ const updateAdminUserGroup = async(idUserGroup, idAdmin)=>{
 }
 const insertMember = async(idUser,idRoutine,idUserGroup)=>{
     try{
-        const group = userGroup.findOne({_id:idUserGroup})
-        group.members.push({idUser,idRoutine}) 
-        await group.save()
+        await userGroup.updateOne({_id:idUserGroup},{$push:{members:{idUser, idRoutine}}})
+    
     }catch(err){
         console.log(err)
         throw new Error("Erro to insert a new member on UserGroup")
