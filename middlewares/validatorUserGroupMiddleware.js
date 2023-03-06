@@ -4,58 +4,61 @@ const userModel = require('../models/userModel')
 //validate functions
 const vUserPayload = (resHandle,idUser) =>{
     if(!idUser){
-        return resHandle.status(400).json({msg:"IdUser não foi enviado"})
+        resHandle.status(400).json({msg:"IdUser não foi enviado"})
+        return true
     }
 }
 const vRoutinePayload = (resHandle,idRoutine) =>{
     if(!idRoutine){
-        return resHandle.status(400).json({msg:"IdRoutine não foi enviado"})
+        resHandle.status(400).json({msg:"IdRoutine não foi enviado"})
+        return true
     }
 }
 const vUserObjectId = (resHandle,idUser) =>{
     if(!mongoose.Types.ObjectId.isValid(idUser)){
-        return resHandle.status(400).json({msg:"IdUser não é um id válido"})
+        resHandle.status(400).json({msg:"IdUser não é um id válido"})
+        return true
     }
 }
 const vRoutineObjectId = (resHandle,idRoutine) =>{
     if(!mongoose.Types.ObjectId.isValid(idRoutine)){
-        return resHandle.status(400).json({msg:"IdRoutine não é um id válido"})
+        resHandle.status(400).json({msg:"IdRoutine não é um id válido"})
+        return true
+    }
+}
+const vUserExists = async(resHandle,idUser)=>{
+    try{           
+        const user = await userModel.getUser(idUser)
+        if(!user){
+            resHandle.status(404).json({msg:"O id do usuário é válido, porém não existe"}) 
+            return true
+        }
+    }catch(err){
+        console.log(err)    
+    }
+}
+const vRoutineExists = async(resHandle,idRoutine)=>{
+    try{           
+        const routineExists = (await routineModel.getRoutineByIdRoutine(idRoutine)).length > 0        
+        if(!routineExists){
+            resHandle.status(404).json({msg:"O id da rotina é válido, porém não existe"}) 
+            return true
+        }  
+    }catch(err){
+        console.log(err)
+        return res.status(500).json({msg:"Ocorreu um erro no servidor"})         
     }
 }
 
 //validadte responses
 const validateCreateUserGroup = async(req,res,next) => {
     const {idUser,idRoutine} = req.body
-    if(!idUser){
-        return res.status(400).json({msg:"IdUser não foi enviado"})
-    }
-    if(!idRoutine){
-        return res.status(400).json({msg:"IdRoutine não foi enviado"})
-    }
-    if(!mongoose.Types.ObjectId.isValid(idRoutine)){
-        return res.status(400).json({msg:"IdRoutine não é um id válido"})
-    }
-    if(!mongoose.Types.ObjectId.isValid(idRoutine)){
-        return res.status(400).json({msg:"IdRoutine não é um id válido"})
-    }   
-    try{           
-        const user = await userModel.getUser(idUser)
-        if(!user){
-            return res.status(404).json({msg:"O id do usuário é válido, porém não existe"}) 
-        }
-    }catch(err){
-        console.log(err)
-    
-    }
-    try{           
-        const routineExists = (await routineModel.getRoutineByIdRoutine(idRoutine)).length > 0        
-        if(!routineExists){
-            return res.status(404).json({msg:"O id da rotina é válido, porém não existe"}) 
-        }  
-    }catch(err){
-        console.log(err)
-        return res.status(500).json({msg:"Ocorreu um erro no servidor"})         
-    }
+    if(vUserPayload(res,idUser)){return}
+    if(vRoutinePayload(res,idRoutine)){return}    
+    if(vUserObjectId(res,idUser)){return}
+    if(vRoutineObjectId(res,idRoutine)){return}   
+    if(await vUserExists(res,idUser)){return}
+    if(await vRoutineExists(res,idRoutine)){return}   
     next()
 } 
 
