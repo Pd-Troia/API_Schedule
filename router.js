@@ -2,6 +2,7 @@ const express = require('express')
 const routineController = require('./controllers/RoutineController')
 const validateMiddleware = require('./middlewares/validatorRoutineMiddleware')
 const userGroupController = require('./controllers/userGroupController')
+const validatorUserGroupMiddleware = require('./middlewares/validatorUserGroupMiddleware')
 
 const router = express.Router()
 
@@ -23,13 +24,20 @@ router.put('/routine/:idRoutine', validateMiddleware.validatePut,routineControll
 //get coincident routime times
 router.get('/coincident/:idsRoutine',validateMiddleware.validateGetCoincidentTimes, routineController.getCoincidingTimes)
 
+
 // UserGroup Routes
 
+
 //Create Group
-router.post('/usergroup/creategroup', userGroupController.creteUserGroup)
+router.post('/usergroup/creategroup',
+    validatorUserGroupMiddleware.validateCreateUserGroup,
+    userGroupController.creteUserGroup
+)
 
 // Get User Group
-router.get('/usergroup/getusergroup/:idUser', userGroupController.getUserGroup )
+router.get('/usergroup/getusergroup/:idUser',
+    userGroupController.getUserGroup,
+)
 
 //Delete User Group
 router.delete('/usergroup/deletegroup/:idUserGroup', userGroupController.deleteUserGroup)
