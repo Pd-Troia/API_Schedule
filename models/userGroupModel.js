@@ -17,6 +17,15 @@ const getUserGroup = async(userId) => {
         throw new Error("Error to find UserGroup")
     }
 }
+const getUserGroupByUserGroupId = async(userGroupId) => {
+    try{
+        const group = await userGroup.findById(userGroupId)
+        return group
+    }catch(err){
+        console.log(err)
+        throw new Error("Error to find UserGroup")
+    }
+}
 const createUserGroup = async(idAdmin, idRoutineAdmin)=>{
     try{
         const group = await userGroup(
@@ -85,6 +94,7 @@ const removeMember = async(idUser, idUserGroup)=>{
 module.exports = {
     createUserGroup,
     getUserGroup,
+    getUserGroupByUserGroupId,
     updateAdminUserGroup,
     updateMemberUserGroup,
     deleteUserGroup,

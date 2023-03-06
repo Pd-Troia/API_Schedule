@@ -1,8 +1,8 @@
 const express = require('express')
 const routineController = require('./controllers/RoutineController')
-const validateMiddleware = require('./middlewares/validatorRoutineMiddleware')
+const validateRoutineMiddleware = require('./middlewares/validatorRoutineMiddleware')
 const userGroupController = require('./controllers/userGroupController')
-const validatorUserGroupMiddleware = require('./middlewares/validatorUserGroupMiddleware')
+const validateUserGroupMiddleware = require('./middlewares/validatorUserGroupMiddleware')
 
 const router = express.Router()
 
@@ -10,19 +10,34 @@ const router = express.Router()
 router.get('/',(req,res)=> res.status(200).json({msg:'api working'}))
 
 //create day schedule
-router.post('/routine',  validateMiddleware.validatePost, routineController.createRoutine)
+router.post('/routine',     
+    validateRoutineMiddleware.validatePost, 
+    routineController.createRoutine
+)
 
 //get day schedule 
-router.get('/routine/:idUser',validateMiddleware.validateGet,routineController.getRoutine)
+router.get('/routine/:idUser',
+    validateRoutineMiddleware.validateGet,
+    routineController.getRoutine
+)
 
 //remove day schedule
-router.delete('/routine/:idRoutine', validateMiddleware.validateDelete,routineController.deleteRoutine)
+router.delete('/routine/:idRoutine', 
+    validateRoutineMiddleware.validateDelete,
+    routineController.deleteRoutine
+)
 
 //Update Routine
-router.put('/routine/:idRoutine', validateMiddleware.validatePut,routineController.updateRoutine)
+router.put('/routine/:idRoutine', 
+    validateRoutineMiddleware.validatePut,
+    routineController.updateRoutine
+)
 
 //get coincident routime times
-router.get('/coincident/:idsRoutine',validateMiddleware.validateGetCoincidentTimes, routineController.getCoincidingTimes)
+router.get('/coincident/:idsRoutine',
+    validateRoutineMiddleware.validateGetCoincidentTimes,
+    routineController.getCoincidingTimes
+)
 
 
 // UserGroup Routes
@@ -30,20 +45,26 @@ router.get('/coincident/:idsRoutine',validateMiddleware.validateGetCoincidentTim
 
 //Create Group
 router.post('/usergroup/creategroup',
-    validatorUserGroupMiddleware.validateCreateUserGroup,
+    validateUserGroupMiddleware.validateCreateUserGroup,
     userGroupController.creteUserGroup
 )
 
 // Get User Group
 router.get('/usergroup/getusergroup/:idUser',
+    validateUserGroupMiddleware.validateGetUserGroup,
     userGroupController.getUserGroup,
 )
 
 //Delete User Group
-router.delete('/usergroup/deletegroup/:idUserGroup', userGroupController.deleteUserGroup)
+router.delete('/usergroup/deletegroup/:idUserGroup', 
+validateUserGroupMiddleware.validateDeleteUserGroup,
+userGroupController.deleteUserGroup)
 
 //Update Admin User Group
-router.patch('/usergroup/updateadmin/:idUserGroup', userGroupController.updateAdminUserGroup )
+router.patch('/usergroup/updateadmin/:idUserGroup', 
+    validateUserGroupMiddleware.validateUpdateAdminUserGroup,
+    userGroupController.updateAdminUserGroup 
+)
 
 //Insert Member in Group
 router.patch('/usergroup/insertmember/:idUserGroup', userGroupController.insertMember)
