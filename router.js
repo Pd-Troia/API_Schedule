@@ -3,6 +3,7 @@ const routineController = require('./controllers/RoutineController')
 const validateRoutineMiddleware = require('./middlewares/validatorRoutineMiddleware')
 const userGroupController = require('./controllers/userGroupController')
 const validateUserGroupMiddleware = require('./middlewares/validatorUserGroupMiddleware')
+const authenticationMiddleware = require('./middlewares/authenticationMiddleware')
 
 const router = express.Router()
 
@@ -51,6 +52,7 @@ router.post('/usergroup/creategroup',
 
 // Get User Group
 router.get('/usergroup/getusergroup/:idUser',
+    authenticationMiddleware.authenticateUser,
     validateUserGroupMiddleware.validateGetUserGroup,
     userGroupController.getUserGroup,
 )
