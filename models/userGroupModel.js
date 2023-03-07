@@ -3,7 +3,7 @@ const schema = mongoose.Schema({
     admin: {type: mongoose.Types.ObjectId, ref: "User"},
     members: [{
         idUser: {type: mongoose.Types.ObjectId, ref: "User"},
-        routineId: {type: mongoose.Types.ObjectId,ref:"Routine"}
+        idRoutine: {type: mongoose.Types.ObjectId,ref:"Routine"}
     }]
 })
 const userGroup = mongoose.model("UserGroup", schema )
@@ -20,7 +20,7 @@ const getUserGroup = async(userId) => {
 const getUserGroupByUserGroupId = async(userGroupId) => {
     try{
         const group = await userGroup.findById(userGroupId)
-        return group
+        return group    
     }catch(err){
         console.log(err)
         throw new Error("Error to find UserGroup")
@@ -33,8 +33,8 @@ const createUserGroup = async(idAdmin, idRoutineAdmin)=>{
                 admin: idAdmin,
                 members:[
                     {
-                    idUser: idAdmin,
-                    idRoutine: idRoutineAdmin
+                    idRoutine: idRoutineAdmin,
+                    idUser: idAdmin
                     }
                 ]
             }

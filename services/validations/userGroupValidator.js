@@ -18,8 +18,7 @@ const vObjectId = (resHandle,idUser,msg) =>{
    
 const vUserExists = async(resHandle,idUser,msg)=>{
     try{           
-        const user = await userModel.getUser(idUser)
-        console.log(!user)
+        const user = await userModel.getUser(idUser)        
         if(!user){
             resHandle.status(404).json({msg}) 
             return true
@@ -27,10 +26,11 @@ const vUserExists = async(resHandle,idUser,msg)=>{
     }catch(err){
         console.log(err)    
     }
+    return false
 }
 const vUserGroupExists = async(resHandle,idUserGroup,msg)=>{
     try{           
-        const userGroup = await userGroupModel.getUserGroupByUserGroupId(idUserGroup)        
+        const userGroup = await userGroupModel.getUserGroupByUserGroupId(idUserGroup)         
         if(!userGroup){
             resHandle.status(404).json({msg}) 
             return true

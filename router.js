@@ -57,8 +57,8 @@ router.get('/usergroup/getusergroup/:idUser',
 
 //Delete User Group
 router.delete('/usergroup/deletegroup/:idUserGroup', 
-validateUserGroupMiddleware.validateDeleteUserGroup,
-userGroupController.deleteUserGroup)
+    validateUserGroupMiddleware.validateDeleteUserGroup,
+    userGroupController.deleteUserGroup)
 
 //Update Admin User Group
 router.patch('/usergroup/updateadmin/:idUserGroup', 
@@ -67,9 +67,15 @@ router.patch('/usergroup/updateadmin/:idUserGroup',
 )
 
 //Insert Member in Group
-router.patch('/usergroup/insertmember/:idUserGroup', userGroupController.insertMember)
+router.patch('/usergroup/insertmember/:idUserGroup', 
+    validateUserGroupMiddleware.validateInsertMember,
+    userGroupController.insertMember
+)
 
 //Remove Member in group
-router.patch('/usergroup/deletemember/:idUserGroup', userGroupController.deleteMember)
+router.patch('/usergroup/deletemember/:idUserGroup', 
+    validateUserGroupMiddleware.validateDeleteMember,
+    userGroupController.deleteMember
+)
 
 module.exports = router
