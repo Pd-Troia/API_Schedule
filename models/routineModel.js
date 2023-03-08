@@ -46,7 +46,7 @@ const getRoutine = async (idUser)=>{
 }
 const getRoutineByIdRoutine = async (idRoutine)=>{
     try{     
-        const routine = await Routine.find({_id:idRoutine}).then((rout)=>rout)        
+        const routine = await Routine.find({_id:idRoutine})     
         return routine 
     }catch(err){
         console.log(err)

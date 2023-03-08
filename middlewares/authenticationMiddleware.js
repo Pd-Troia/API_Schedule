@@ -6,8 +6,7 @@ const authenticateUser = (req,res,next) =>{
         return res.status(401).json({msg:'Token não fornecido'})
     }
     try{
-        const decoded = jwt.decode(token,secret)
-        console.log(decoded)
+        const decoded = jwt.decode(token,secret)        
         if(decoded){
             req.user = decoded
             next()
