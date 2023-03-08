@@ -65,12 +65,11 @@ const validateGetCoincidentTimes = async(req,res,next) =>{
     const _id = multipleRoutinesId.split("&")    
     for(let i = 0; i<_id.length;i++){
         if(!mongoose.Types.ObjectId.isValid(_id[i])){
-            return res.status(400).json({msg:`O elemento ${_id[i]} é não é um id válido,
-             informe as rotinas dividindo cada rotina com & ex: IdRotina1&IdRotinea2`})
+            return res.status(400).json({msg:`O elemento ${_id[i]} é não é um id válido, informe as rotinas dividindo cada rotina com & ex: IdRotina1&IdRotina2`})
         }
     }
-    const query = await routineModel.getRoutineByIdRoutine(_id) 
-    const routinesNotFounded = routineValidator.notFoundRoutine(query,_id)
+    const query = await routineModel.getRoutineByIdRoutine(_id)   
+    const routinesNotFounded = routineValidator.notFoundRoutine(_id,query)
     if(routinesNotFounded.length > 0){
         return res.status(400).json({msg:"Algumas rotinas não foram encontradas",routinesNotFounded})
     }

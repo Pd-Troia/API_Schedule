@@ -44,17 +44,19 @@ const verifyConditions = (intervals)=>{
     }
     return errors   
 }
-const notFoundRoutine = (routines, listRoutines) =>{
-    const routinesNotFounded = []
-    for(let i = 0;i<routines.length;i++){
+const notFoundRoutine = (listIdRoutines, routines) =>{
+    const routinesNotFounded = []     
+    for(let i = 0;i<listIdRoutines.length;i++){
         let founded = false 
-        for(let j = 0;j<listRoutines.length;j++){            
-            if(routines[i]._id.toString() === listRoutines[j]){
+        for(let j = 0;j<routines.length;j++){            
+            let firstElement = listIdRoutines[i]            
+            let secondElement = routines[j]._id.toString()
+            if(firstElement === secondElement){
                 founded = true
             }
         }
         if(!founded){
-            routinesNotFounded.push(routines[i]._id)
+            routinesNotFounded.push(listIdRoutines[i])
         }
     }
     return routinesNotFounded
