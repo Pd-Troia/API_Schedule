@@ -84,8 +84,8 @@ const insertMember = async(idUser,idRoutine,idUserGroup)=>{
 }
 const removeMember = async(idUser, idUserGroup)=>{
     try{
-        const query = await userGroup.updateOne({_id:idUserGroup}, {$pull: {members:{idUser:idUser}}})    
-        console.log(query)    
+        const query = await userGroup.updateOne({_id:idUserGroup}, {$pull: {members:{idUser:idUser}}})   
+        return query       
     }catch(err){
         console.log(err)
         throw new Error("Erro to insert a new member on UserGroup")

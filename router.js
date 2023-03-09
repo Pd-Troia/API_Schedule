@@ -3,7 +3,7 @@ const routineController = require('./controllers/RoutineController')
 const validateRoutineMiddleware = require('./middlewares/validatorRoutineMiddleware')
 const userGroupController = require('./controllers/userGroupController')
 const validateUserGroupMiddleware = require('./middlewares/validatorUserGroupMiddleware')
-const authorizationRoutineMiddleware = require('./middlewares/authorizationRoutineMiddleware')
+const authorizationMiddleware = require('./middlewares/authorizationMiddleware')
 const authenticationMiddleware = require('./middlewares/authenticationMiddleware')
 
 const router = express.Router()
@@ -15,7 +15,7 @@ router.get('/',(req,res)=> res.status(200).json({msg:'api working'}))
 router.post('/routine',     
     validateRoutineMiddleware.validatePost, 
     authenticationMiddleware.authenticateUser,
-    authorizationRoutineMiddleware.confirmRoutineOwnerByIdRoutineBody,
+    authorizationMiddleware.confirmRoutineOwnerByIdRoutineBody,
     routineController.createRoutine
 )
 
@@ -23,7 +23,7 @@ router.post('/routine',
 router.get('/routine/:idUser',
     validateRoutineMiddleware.validateGet,
     authenticationMiddleware.authenticateUser,
-    authorizationRoutineMiddleware.confirmRoutineOwnerByIdUserParams,
+    authorizationMiddleware.confirmRoutineOwnerByIdUserParams,
     routineController.getRoutine
 )
 
@@ -31,7 +31,7 @@ router.get('/routine/:idUser',
 router.delete('/routine/:idRoutine', 
     validateRoutineMiddleware.validateDelete,
     authenticationMiddleware.authenticateUser,
-    authorizationRoutineMiddleware.confirmRoutineOwnerByIdRoutineParams,
+    authorizationMiddleware.confirmRoutineOwnerByIdRoutineParams,
     routineController.deleteRoutine
 )
 
@@ -39,7 +39,7 @@ router.delete('/routine/:idRoutine',
 router.put('/routine/:idRoutine', 
     validateRoutineMiddleware.validatePut,
     authenticationMiddleware.authenticateUser,
-    authorizationRoutineMiddleware.confirmRoutineOwnerByIdRoutineParams,
+    authorizationMiddleware.confirmRoutineOwnerByIdRoutineParams,
     routineController.updateRoutine
 )
 
@@ -47,7 +47,7 @@ router.put('/routine/:idRoutine',
 router.get('/coincident/:idsRoutine',
     validateRoutineMiddleware.validateGetCoincidentTimes,
     authenticationMiddleware.authenticateUser,
-    authorizationRoutineMiddleware.confirmRoutineOwnerByMultipleIdRoutineParams,
+    authorizationMiddleware.confirmRoutineOwnerByMultipleIdRoutineParams,
     routineController.getCoincidingTimes
 )
 
@@ -58,7 +58,9 @@ router.get('/coincident/:idsRoutine',
 //Create Group
 router.post('/usergroup/creategroup',
     validateUserGroupMiddleware.validateCreateUserGroup,
-    authenticationMiddleware.authenticateUser,    
+    authenticationMiddleware.authenticateUser,
+    authorizationMiddleware.confirmRoutineOwnerByIdRoutineBody, 
+    authorizationMiddleware.confirmRoutineOwnerByIdRoutineBodyQuery,       
     userGroupController.creteUserGroup
 )
 
@@ -66,6 +68,7 @@ router.post('/usergroup/creategroup',
 router.get('/usergroup/getusergroup/:idUser',
     validateUserGroupMiddleware.validateGetUserGroup,
     authenticationMiddleware.authenticateUser,
+    authorizationMiddleware.confirmRoutineOwnerByIdUserParams,
     userGroupController.getUserGroup,
 )
 
@@ -73,12 +76,14 @@ router.get('/usergroup/getusergroup/:idUser',
 router.delete('/usergroup/deletegroup/:idUserGroup',
     validateUserGroupMiddleware.validateDeleteUserGroup,
     authenticationMiddleware.authenticateUser, 
+    authorizationMiddleware.confirmAdminUserGroup,
     userGroupController.deleteUserGroup)
 
 //Update Admin User Group
 router.patch('/usergroup/updateadmin/:idUserGroup', 
-    authenticationMiddleware.authenticateUser,
     validateUserGroupMiddleware.validateUpdateAdminUserGroup,
+    authenticationMiddleware.authenticateUser,
+    authorizationMiddleware.confirmAdminUserGroup,
     userGroupController.updateAdminUserGroup 
 )
 
@@ -86,6 +91,7 @@ router.patch('/usergroup/updateadmin/:idUserGroup',
 router.patch('/usergroup/insertmember/:idUserGroup', 
     authenticationMiddleware.authenticateUser,
     validateUserGroupMiddleware.validateInsertMember,
+    authorizationMiddleware.confirmAdminUserGroup,
     userGroupController.insertMember
 )
 
@@ -93,6 +99,7 @@ router.patch('/usergroup/insertmember/:idUserGroup',
 router.patch('/usergroup/deletemember/:idUserGroup', 
     authenticationMiddleware.authenticateUser,
     validateUserGroupMiddleware.validateDeleteMember,
+    authorizationMiddleware.confirmAdminUserGroup,
     userGroupController.deleteMember
 )
 

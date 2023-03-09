@@ -46,7 +46,7 @@ const validateUpdateAdminUserGroup = async(req,res,next) => {
     if(userGroupValidator.vObjectId(res,idUserGroup,vOUserGroupMsg)){return}
     if(userGroupValidator.vPayload(res,newIdAdmin,vPUserGroupMsg)){return}
     if(userGroupValidator.vObjectId(res,newIdAdmin,vOUserGroupMsg)){return} 
-    if(await userGroupValidator.vUserGroupExists(res,newIdAdmin,vEUserMsg)){return}    
+    if(await userGroupValidator.vUserExists(res,newIdAdmin,vEUserMsg)){return}    
     if(await userGroupValidator.vUserGroupExists(res,idUserGroup,vEUserGroupMsg)){return}
     next()
 }
