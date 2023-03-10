@@ -77,6 +77,14 @@ const vMemberOutGroup = async(resHandle,idUser,idUserGroup,msg) =>{
     }
     return false
 }
+const vRemoveAdmin = async(resHandle,idUser,idUserGroup,msg) =>{
+    const group = await userGroupModel.getUserGroupByUserGroupId(idUserGroup)
+    if(idUser == group.admin.toString()){
+        return resHandle.status(403).json({msg})
+    }
+    return false
+}
+
 
 module.exports = {
     vPayload,
@@ -85,5 +93,6 @@ module.exports = {
     vUserGroupExists,
     vRoutineExists,
     vMemberInGroup,
-    vMemberOutGroup
+    vMemberOutGroup,
+    vRemoveAdmin
 }

@@ -14,7 +14,8 @@ const vERoutineMsg = "O id da Rotina não existe no sistema"
 const vEUserGroupMsg = "O id do grupo de usuários não existe no sistema"
 //Insert and Remove Group
 const vIUserMsg = "O usuário já pertence no grupo"
-const vRUserMsg = "O usuário não pertence no  grupo "
+const vRUserMsg = "O usuário não pertence no  grupo"
+const vRAdminMsg = "Não é possivel remover o admin do grupo"
 //validadte responses
 const validateCreateUserGroup = async(req,res,next) => {
     const {idUser,idRoutine} = req.body
@@ -78,6 +79,7 @@ const validateDeleteMember = async(req,res,next)=>{
     if(await userGroupValidator.vUserExists(res,idUser,vEUserMsg)){return}    
     if(await userGroupValidator.vUserGroupExists(res,idUserGroup,vEUserGroupMsg)){return} 
     if(await userGroupValidator.vMemberOutGroup(res,idUser,idUserGroup,vRUserMsg)){return}  
+    if(await userGroupValidator.vRemoveAdmin(res,idUser,idUserGroup,vRAdminMsg)){return}
     next()
 }
 
