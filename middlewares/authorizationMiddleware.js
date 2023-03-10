@@ -16,6 +16,14 @@ const confirmRoutineOwnerByIdRoutineBody = (req,res,next)=>{
     }
     next()
 }
+const confirmRoutineOwnerByIdRoutineIdUserBody = async(req,res,next)=>{
+    const {idUser,idRoutine} = req.body 
+    const routine = await routineModel.getRoutineByIdRoutine(idRoutine)    
+    if(idUser != routine[0].idUser.toString()){
+        return res.status(403).json({msg:"A rotina não pertence ao idUser informado"})
+    }
+    next()
+}
 const confirmRoutineOwnerByIdRoutineBodyQuery = async(req,res,next)=>{
     const idUserByAuth = req.user.id
     const {idUser} = req.body
@@ -67,5 +75,6 @@ module.exports = {
     confirmRoutineOwnerByMultipleIdRoutineParams,
     confirmRoutineOwnerByIdRoutineBody,
     confirmRoutineOwnerByIdRoutineBodyQuery,
-    confirmAdminUserGroup
+    confirmAdminUserGroup,
+    confirmRoutineOwnerByIdRoutineIdUserBody
 }

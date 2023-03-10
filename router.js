@@ -92,6 +92,7 @@ router.patch('/usergroup/insertmember/:idUserGroup',
     authenticationMiddleware.authenticateUser,
     validateUserGroupMiddleware.validateInsertMember,
     authorizationMiddleware.confirmAdminUserGroup,
+    authorizationMiddleware.confirmRoutineOwnerByIdRoutineIdUserBody,
     userGroupController.insertMember
 )
 
