@@ -91,6 +91,7 @@ const removeMember = async(idUser, idUserGroup)=>{
         throw new Error("Erro to insert a new member on UserGroup")
     }
 }
+
 module.exports = {
     createUserGroup,
     getUserGroup,

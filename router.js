@@ -98,8 +98,8 @@ router.patch('/usergroup/insertmember/:idUserGroup',
 //Remove Member in group
 router.patch('/usergroup/deletemember/:idUserGroup', 
     authenticationMiddleware.authenticateUser,
-    validateUserGroupMiddleware.validateDeleteMember,
-    authorizationMiddleware.confirmAdminUserGroup,
+    validateUserGroupMiddleware.validateDeleteMember,    
+    authorizationMiddleware.confirmAdminUserGroup,    
     userGroupController.deleteMember
 )
 

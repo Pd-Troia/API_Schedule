@@ -12,6 +12,9 @@ const vOUserGroupMsg = "O Id User Group enviado não é válido"
 const vEUserMsg = "O id do usuário não existe no sistema"
 const vERoutineMsg = "O id da Rotina não existe no sistema"
 const vEUserGroupMsg = "O id do grupo de usuários não existe no sistema"
+//Insert and Remove Group
+const vIUserMsg = "O usuário já pertence no grupo"
+const vRUserMsg = "O usuário não pertence no  grupo "
 //validadte responses
 const validateCreateUserGroup = async(req,res,next) => {
     const {idUser,idRoutine} = req.body
@@ -62,6 +65,7 @@ const validateInsertMember = async(req,res,next)=>{
     if(await userGroupValidator.vUserExists(res,idUser,vEUserMsg)){return}    
     if(await userGroupValidator.vUserGroupExists(res,idUserGroup,vEUserGroupMsg)){return}
     if(await userGroupValidator.vRoutineExists(res,idRoutine,vERoutineMsg)){return}   
+    if(await userGroupValidator.vMemberInGroup(res,idUser,idUserGroup,vIUserMsg)){return}
     next()
 }
 const validateDeleteMember = async(req,res,next)=>{
@@ -72,7 +76,8 @@ const validateDeleteMember = async(req,res,next)=>{
     if(userGroupValidator.vPayload(res,idUser,vPUsermsg)){return}
     if(userGroupValidator.vObjectId(res,idUser,vOUserMsg)){return}     
     if(await userGroupValidator.vUserExists(res,idUser,vEUserMsg)){return}    
-    if(await userGroupValidator.vUserGroupExists(res,idUserGroup,vEUserGroupMsg)){return}    
+    if(await userGroupValidator.vUserGroupExists(res,idUserGroup,vEUserGroupMsg)){return} 
+    if(await userGroupValidator.vMemberOutGroup(res,idUser,idUserGroup,vRUserMsg)){return}  
     next()
 }
 

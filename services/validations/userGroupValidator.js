@@ -53,10 +53,37 @@ const vRoutineExists = async(resHandle,idRoutine,msg)=>{
     }
     return false
 }
+const vMemberInGroup = async(resHandle,idUser,idUserGroup,msg) =>{     
+    const group = await userGroupModel.getUserGroupByUserGroupId(idUserGroup)
+    for(let i=0;i<group.members.length;i++){
+        let firstElement = group.members[i].idUser.toString()           
+        if(firstElement === idUser){
+            return resHandle.status(400).json({msg})
+        }
+    }
+    return false
+}
+const vMemberOutGroup = async(resHandle,idUser,idUserGroup,msg) =>{     
+    const group = await userGroupModel.getUserGroupByUserGroupId(idUserGroup)
+    let founded = false
+    for(let i=0;i<group.members.length;i++){  
+        let firstElement = group.members[i].idUser.toString()      
+        if(firstElement === idUser){
+            founded = true            
+        }
+    }
+    if(!founded){
+        return resHandle.status(400).json({msg})
+    }
+    return false
+}
+
 module.exports = {
     vPayload,
     vObjectId,
     vUserExists,
     vUserGroupExists,
-    vRoutineExists
+    vRoutineExists,
+    vMemberInGroup,
+    vMemberOutGroup
 }
