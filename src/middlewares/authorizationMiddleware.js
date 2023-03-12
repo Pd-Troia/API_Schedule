@@ -24,7 +24,7 @@ const confirmRoutineOwnerByIdRoutineIdUserBody = async(req,res,next)=>{
     }
     next()
 }
-const confirmRoutineOwnerByIdRoutineBodyQuery = async(req,res,next)=>{
+const confirmRoutineOwnerByIdRoutineBodyQueryBD = async(req,res,next)=>{
     const idUserByAuth = req.user.id
     const {idUser} = req.body
     const routine = await routineModel.getRoutine(idUser)     
@@ -74,7 +74,7 @@ module.exports = {
     confirmRoutineOwnerByIdRoutineParams,
     confirmRoutineOwnerByMultipleIdRoutineParams,
     confirmRoutineOwnerByIdRoutineBody,
-    confirmRoutineOwnerByIdRoutineBodyQuery,
+    confirmRoutineOwnerByIdRoutineBodyQueryBD,
     confirmAdminUserGroup,
     confirmRoutineOwnerByIdRoutineIdUserBody
 }

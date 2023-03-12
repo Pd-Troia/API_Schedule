@@ -60,7 +60,7 @@ router.post('/usergroup/creategroup',
     validateUserGroupMiddleware.validateCreateUserGroup,
     authenticationMiddleware.authenticateUser,
     authorizationMiddleware.confirmRoutineOwnerByIdRoutineBody, 
-    authorizationMiddleware.confirmRoutineOwnerByIdRoutineBodyQuery,       
+    authorizationMiddleware.confirmRoutineOwnerByIdRoutineBodyQueryBD,       
     userGroupController.creteUserGroup
 )
 
