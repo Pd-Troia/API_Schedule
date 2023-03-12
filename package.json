@@ -2,11 +2,11 @@
   "name": "api-login",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "jest",
-    "dev": "cross-env ISDEV=true nodemon server.js --ignore __tests__ ",
-    "start": "node server.js "
+    "dev": "cross-env ISDEV=true nodemon ./src/server.js --ignore __tests__ ",
+    "start": "node ./src/server.js "
   },
   "keywords": [],
   "author": "",

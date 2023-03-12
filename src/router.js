@@ -1,10 +1,10 @@
 const express = require('express')
-const routineController = require('./src/controllers/RoutineController')
-const validateRoutineMiddleware = require('./src/middlewares/validatorRoutineMiddleware')
-const userGroupController = require('./src/controllers/userGroupController')
-const validateUserGroupMiddleware = require('./src/middlewares/validatorUserGroupMiddleware')
-const authorizationMiddleware = require('./src/middlewares/authorizationMiddleware')
-const authenticationMiddleware = require('./src/middlewares/authenticationMiddleware')
+const routineController = require('./controllers/RoutineController')
+const validateRoutineMiddleware = require('./middlewares/validatorRoutineMiddleware')
+const userGroupController = require('./controllers/userGroupController')
+const validateUserGroupMiddleware = require('./middlewares/validatorUserGroupMiddleware')
+const authorizationMiddleware = require('./middlewares/authorizationMiddleware')
+const authenticationMiddleware = require('./middlewares/authenticationMiddleware')
 
 const router = express.Router()
 
