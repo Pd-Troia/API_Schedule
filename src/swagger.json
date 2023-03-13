@@ -1,0 +1,782 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Schedule API",
+    "description": "API to manage and calculate routine of user Groups",
+    "contact": {
+      "github":"https://github.com/Pd-Troia",
+      "Linkedin":"https://www.linkedin.com/in/hytalo-benaventana/"
+    },
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "localhost:3333",
+      "variables": {}
+    }
+  ],
+  "paths": {
+    "/usergroup/creategroup": {
+      "post": {
+        "tags": [
+          "UserGroup"
+        ],
+        "summary": "Create Group",
+        "description": "Endpoint to create User Group",
+        "operationId": "CreateGroup",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "Baerer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MDg5NGQ2MzA1NjI1NTdhNmRjM2VmZSIsImlhdCI6MTY3ODI4NDAxNX0.Z4yqoWzYcQI2VkmxlZ3T32_syPce7hk_hV_Cee7yZ8g"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/CreateGroupRequest"
+                  },
+                  {
+                    "example": {
+                      "idUser": "640894d630562557a6dc3efe",
+                      "idRoutine": "6408956a9c69ae2e8d8e0be6"
+                    }
+                  }
+                ]
+              },
+              "example": {
+                "idUser": "640894d630562557a6dc3efe",
+                "idRoutine": "6408956a9c69ae2e8d8e0be6"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "A confirm message",
+            "headers": {},
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type":"object",
+                  "properties": {
+                    "msg":{
+                      "type":"string"
+                    }
+                  }
+                },
+                "example":{
+                  "msg":"Grupo criado com sucesso"
+                }
+              }
+            }            
+          }          
+        },
+        "deprecated": false,
+        "security": []
+      }
+    },
+    "/usergroup/getusergroup/640894d630562557a6dc3efe": {
+      "get": {
+        "tags": [
+          "UserGroup"
+        ],
+        "summary": "Get Groups by idUser",
+        "description": "",
+        "operationId": "GetGroupsbyidUser",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "Baerer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MDg5NGQ2MzA1NjI1NTdhNmRjM2VmZSIsImlhdCI6MTY3ODI4NDAxNX0.Z4yqoWzYcQI2VkmxlZ3T32_syPce7hk_hV_Cee7yZ8g"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {},
+            "content": {
+              "text/plain": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": []
+      }
+    },
+    "/usergroup/updateadmin/6409c707ba9e16f5fec2eb0b": {
+      "patch": {
+        "tags": [
+          "UserGroup"
+        ],
+        "summary": "Update Admin",
+        "description": "",
+        "operationId": "UpdateAdmin",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "Baerer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MDg5NGQ2MzA1NjI1NTdhNmRjM2VmZSIsImlhdCI6MTY3ODI4NDAxNX0.Z4yqoWzYcQI2VkmxlZ3T32_syPce7hk_hV_Cee7yZ8g"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/UpdateAdminRequest"
+                  },
+                  {
+                    "example": {
+                      "newIdAdmin": "64009ba1410e61f3b53c5457"
+                    }
+                  }
+                ]
+              },
+              "example": {
+                "newIdAdmin": "64009ba1410e61f3b53c5457"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {},
+            "content": {
+              "text/plain": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": []
+      }
+    },
+    "/usergroup/insertmember/640b8b79f1b6a44dac533ce5": {
+      "patch": {
+        "tags": [
+          "UserGroup"
+        ],
+        "summary": "Insert Member",
+        "description": "",
+        "operationId": "InsertMember",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "Baerer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MDg5NGQ2MzA1NjI1NTdhNmRjM2VmZSIsImlhdCI6MTY3ODI4NDAxNX0.Z4yqoWzYcQI2VkmxlZ3T32_syPce7hk_hV_Cee7yZ8g"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/InsertMemberRequest"
+                  },
+                  {
+                    "example": {
+                      "idUser": "64009ba1410e61f3b53c5457",
+                      "idRoutine": "64009ce4c8e467572f3dcce8"
+                    }
+                  }
+                ]
+              },
+              "example": {
+                "idUser": "64009ba1410e61f3b53c5457",
+                "idRoutine": "64009ce4c8e467572f3dcce8"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {},
+            "content": {
+              "text/plain": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": []
+      }
+    },
+    "/usergroup/deletemember/640b8b79f1b6a44dac533ce5": {
+      "patch": {
+        "tags": [
+          "UserGroup"
+        ],
+        "summary": "Delete Member",
+        "description": "",
+        "operationId": "DeleteMember",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "Baerer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MDg5NGQ2MzA1NjI1NTdhNmRjM2VmZSIsImlhdCI6MTY3ODI4NDAxNX0.Z4yqoWzYcQI2VkmxlZ3T32_syPce7hk_hV_Cee7yZ8g"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/DeleteMemberRequest"
+                  },
+                  {
+                    "example": {
+                      "idUser": "640894d630562557a6dc3efe"
+                    }
+                  }
+                ]
+              },
+              "example": {
+                "idUser": "640894d630562557a6dc3efe"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {},
+            "content": {
+              "text/plain": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": []
+      }
+    },
+    "/usergroup/deletegroup/6409c707ba9e16f5fec2eb0b": {
+      "delete": {
+        "tags": [
+          "UserGroup"
+        ],
+        "summary": "Delete Group",
+        "description": "",
+        "operationId": "DeleteGroup",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "Baerer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MDg5NGQ2MzA1NjI1NTdhNmRjM2VmZSIsImlhdCI6MTY3ODI4NDAxNX0.Z4yqoWzYcQI2VkmxlZ3T32_syPce7hk_hV_Cee7yZ8g"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {},
+            "content": {
+              "text/plain": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": []
+      }
+    },
+    "/coincident/640897d1d54d76001e3fd45f&6408956a9c69ae2e8d8e0be6": {
+      "get": {
+        "tags": [
+          "Routine"
+        ],
+        "summary": "getCoincidentTimes",
+        "description": "",
+        "operationId": "getCoincidentTimes",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "Baerer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MDg5NGQ2MzA1NjI1NTdhNmRjM2VmZSIsImlhdCI6MTY3ODI4NDAxNX0.Z4yqoWzYcQI2VkmxlZ3T32_syPce7hk_hV_Cee7yZ8g"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {},
+            "content": {
+              "text/plain": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": []
+      }
+    },
+    "/routine/63f923ead3a1ee01fcafbd30": {
+      "delete": {
+        "tags": [
+          "Routine"
+        ],
+        "summary": "New Request",
+        "description": "",
+        "operationId": "NewRequest",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "Baerer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MDg5NGQ2MzA1NjI1NTdhNmRjM2VmZSIsImlhdCI6MTY3ODI4NDAxNX0.Z4yqoWzYcQI2VkmxlZ3T32_syPce7hk_hV_Cee7yZ8g"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {},
+            "content": {
+              "text/plain": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": []
+      }
+    },
+    "/routine": {
+      "post": {
+        "tags": [
+          "Routine"
+        ],
+        "summary": "Create Routine",
+        "description": "",
+        "operationId": "CreateRoutine",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "Baerer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MDg5NGQ2MzA1NjI1NTdhNmRjM2VmZSIsImlhdCI6MTY3ODI4NDAxNX0.Z4yqoWzYcQI2VkmxlZ3T32_syPce7hk_hV_Cee7yZ8g"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/CreateRoutineRequest"
+                  },
+                  {
+                    "example": {
+                      "idUser": "640894d630562557a6dc3efe",
+                      "intervals": [
+                        {
+                          "initial": 10,
+                          "ending": 50,
+                          "label": "mamae&PAPAI"
+                        },
+                        {
+                          "initial": 50,
+                          "ending": 200,
+                          "label": "bebezaochorao"
+                        },
+                        {
+                          "initial": 200,
+                          "ending": 150000,
+                          "label": "abluble"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              "example": {
+                "idUser": "640894d630562557a6dc3efe",
+                "intervals": [
+                  {
+                    "initial": 10,
+                    "ending": 50,
+                    "label": "mamae&PAPAI"
+                  },
+                  {
+                    "initial": 50,
+                    "ending": 200,
+                    "label": "bebezaochorao"
+                  },
+                  {
+                    "initial": 200,
+                    "ending": 150000,
+                    "label": "abluble"
+                  }
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {},
+            "content": {
+              "text/plain": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": []
+      }
+    },
+    "/routine/640894d630562557a6dc3efe": {
+      "get": {
+        "tags": [
+          "Routine"
+        ],
+        "summary": "Get Routine",
+        "description": "",
+        "operationId": "GetRoutine",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "Baerer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MDg5NGQ2MzA1NjI1NTdhNmRjM2VmZSIsImlhdCI6MTY3ODI4NDAxNX0.Z4yqoWzYcQI2VkmxlZ3T32_syPce7hk_hV_Cee7yZ8g"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {},
+            "content": {
+              "text/plain": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": []
+      }
+    },
+    "/routine/6408956a9c69ae2e8d8e0be6": {
+      "put": {
+        "tags": [
+          "Routine"
+        ],
+        "summary": "New Request",
+        "description": "",
+        "operationId": "PutNewRequest",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "Baerer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MDg5NGQ2MzA1NjI1NTdhNmRjM2VmZSIsImlhdCI6MTY3ODI4NDAxNX0.Z4yqoWzYcQI2VkmxlZ3T32_syPce7hk_hV_Cee7yZ8g"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/NewRequestRequest"
+                  },
+                  {
+                    "example": {
+                      "intervals": [
+                        {
+                          "initial": 0,
+                          "ending": 20,
+                          "label": "acordando"
+                        },
+                        {
+                          "initial": 50,
+                          "ending": 100,
+                          "label": "trabalhando"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              "example": {
+                "intervals": [
+                  {
+                    "initial": 0,
+                    "ending": 20,
+                    "label": "acordando"
+                  },
+                  {
+                    "initial": 50,
+                    "ending": 100,
+                    "label": "trabalhando"
+                  }
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {},
+            "content": {
+              "text/plain": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": []
+      }
+    }
+  },
+  "components": {    
+    "schemas": {
+      "CreateGroupRequest": {
+        "title": "CreateGroupRequest",
+        "required": [
+          "idUser",
+          "idRoutine"
+        ],
+        "type": "object",
+        "properties": {
+          "idUser": {
+            "type": "string"
+          },
+          "idRoutine": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "idUser": "640894d630562557a6dc3efe",
+          "idRoutine": "6408956a9c69ae2e8d8e0be6"
+        }
+      },
+      "UpdateAdminRequest": {
+        "title": "UpdateAdminRequest",
+        "required": [
+          "newIdAdmin"
+        ],
+        "type": "object",
+        "properties": {
+          "newIdAdmin": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "newIdAdmin": "64009ba1410e61f3b53c5457"
+        }
+      },
+      "InsertMemberRequest": {
+        "title": "InsertMemberRequest",
+        "required": [
+          "idUser",
+          "idRoutine"
+        ],
+        "type": "object",
+        "properties": {
+          "idUser": {
+            "type": "string"
+          },
+          "idRoutine": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "idUser": "64009ba1410e61f3b53c5457",
+          "idRoutine": "64009ce4c8e467572f3dcce8"
+        }
+      },
+      "DeleteMemberRequest": {
+        "title": "DeleteMemberRequest",
+        "required": [
+          "idUser"
+        ],
+        "type": "object",
+        "properties": {
+          "idUser": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "idUser": "640894d630562557a6dc3efe"
+        }
+      },
+      "CreateRoutineRequest": {
+        "title": "CreateRoutineRequest",
+        "required": [
+          "idUser",
+          "intervals"
+        ],
+        "type": "object",
+        "properties": {
+          "idUser": {
+            "type": "string"
+          },
+          "intervals": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": ""
+          }
+        },
+        "example": {
+          "idUser": "640894d630562557a6dc3efe",
+          "intervals": [
+            {
+              "initial": 10,
+              "ending": 50,
+              "label": "mamae&PAPAI"
+            },
+            {
+              "initial": 50,
+              "ending": 200,
+              "label": "bebezaochorao"
+            },
+            {
+              "initial": 200,
+              "ending": 150000,
+              "label": "abluble"
+            }
+          ]
+        }
+      },
+      "NewRequestRequest": {
+        "title": "NewRequestRequest",
+        "required": [
+          "intervals"
+        ],
+        "type": "object",
+        "properties": {
+          "intervals": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": ""
+          }
+        },
+        "example": {
+          "intervals": [
+            {
+              "initial": 0,
+              "ending": 20,
+              "label": "birucando"
+            },
+            {
+              "initial": 50,
+              "ending": 100,
+              "label": "zurucando"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "UserGroup",
+      "description": ""
+    },
+    {
+      "name": "Routine",
+      "description": ""
+    },
+    {
+      "name": "API Schedule",
+      "description": ""
+    }
+  ]
+}
