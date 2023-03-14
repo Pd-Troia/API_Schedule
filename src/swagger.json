@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "Schedule API",
-    "description": "API to manage and calculate routine of user Groups",
+    "description": "API to manage and calculate routine of user groups",
     "contact": {
       "github":"https://github.com/Pd-Troia",
       "Linkedin":"https://www.linkedin.com/in/hytalo-benaventana/"
@@ -22,7 +22,7 @@
           "UserGroup"
         ],
         "summary": "Create Group",
-        "description": "Endpoint to create User Group",
+        "description": "Create User Group by body ",
         "operationId": "CreateGroup",
         "parameters": [
           {
@@ -87,7 +87,7 @@
         "security": []
       }
     },
-    "/usergroup/getusergroup/:idUser": {
+    "/usergroup/getusergroup/{idUser}": {
       "get": {
         "tags": [
           "UserGroup"
@@ -96,6 +96,16 @@
         "description": "Get all user groups of user by given idUser in params",
         "operationId": "GetGroupsbyidUser",
         "parameters": [
+          {
+            "in":"path",
+            "name":"idUser",
+            "required":"true",
+            "schema":{
+              "type":"string",
+              "example":"640f22fa76e66261ea761bb6"
+            },
+            "description":"Id of User"
+          },
           {
             "name": "Authorization",
             "in": "header",
@@ -183,15 +193,25 @@
         "security": []
       }
     },
-    "/usergroup/updateadmin/:idUserGroup": {
+    "/usergroup/updateadmin/{idUserGroup}": {
       "patch": {
         "tags": [
           "UserGroup"
         ],
         "summary": "Update Admin",
-        "description": "Change Admin of User Group by given idUserGroup in params",
+        "description": "Change the user group administrator by giving a user id",
         "operationId": "UpdateAdmin",
         "parameters": [
+          {
+            "in":"path",
+            "name":"idUserGroup",
+            "required":"true",
+            "schema":{
+              "type":"string",
+              "example":"640f22fa76e66261ea761bb6"
+            },
+            "description":"Id of User Group"
+          },
           {
             "name": "Authorization",
             "in": "header",
@@ -252,7 +272,7 @@
         "security": []
       }
     },
-    "/usergroup/insertmember/:idUserGroup": {
+    "/usergroup/insertmember/{idUserGroup}": {
       "patch": {
         "tags": [
           "UserGroup"
@@ -261,6 +281,16 @@
         "description": "",
         "operationId": "InsertMember",
         "parameters": [
+          {
+            "in":"path",
+            "name":"idUserGroup",
+            "required":"true",
+            "schema":{
+              "type":"string",
+              "example":"640f22fa76e66261ea761bb6"
+            },
+            "description":"Id of User Group"
+          },
           {
             "name": "Authorization",
             "in": "header",
@@ -323,7 +353,7 @@
         "security": []
       }
     },
-    "/usergroup/deletemember/:idUserGroup": {
+    "/usergroup/deletemember/{idUserGroup}": {
       "patch": {
         "tags": [
           "UserGroup"
@@ -332,6 +362,16 @@
         "description": "",
         "operationId": "DeleteMember",
         "parameters": [
+          {
+            "in":"path",
+            "name":"idUserGroup",
+            "required":"true",
+            "schema":{
+              "type":"string",
+              "example":"640f22fa76e66261ea761bb6"
+            },
+            "description":"Id of User Group"
+          },
           {
             "name": "Authorization",
             "in": "header",
@@ -392,7 +432,7 @@
         "security": []
       }
     },
-    "/usergroup/deletegroup/:idUserGroup": {
+    "/usergroup/deletegroup/{idUserGroup}": {
       "delete": {
         "tags": [
           "UserGroup"
@@ -401,6 +441,16 @@
         "description": "",
         "operationId": "DeleteGroup",
         "parameters": [
+          {
+            "in":"path",
+            "name":"idUserGroup",
+            "required":"true",
+            "schema":{
+              "type":"string",
+              "example":"640f22fa76e66261ea761bb6"
+            },
+            "description":"Id of User Group"
+          },
           {
             "name": "Authorization",
             "in": "header",
@@ -438,7 +488,7 @@
         "security": []
       }
     },
-    "/coincident/:idsRoutine": {
+    "/coincident/{idsRoutine}": {
       "get": {
         "tags": [
           "Routine"
@@ -447,6 +497,16 @@
         "description": "Receive multiple ids splited by '&'",
         "operationId": "getCoincidentTimes",
         "parameters": [
+          {
+            "in":"path",
+            "name":"idUserGroup",
+            "required":"true",
+            "schema":{
+              "type":"string",
+              "example":"640f22fa76e66261ea761bb6"
+            },
+            "description":"Id of User Group"
+          },
           {
             "name": "Authorization",
             "in": "header",
@@ -506,7 +566,7 @@
         "security": []
       }
     },
-    "/routine/:idRoutine": {
+    "/routine/{idRoutine}": {
       "delete": {
         "tags": [
           "Routine"
@@ -515,6 +575,16 @@
         "description": "",
         "operationId": "NewRequest",
         "parameters": [
+          {
+            "in":"path",
+            "name":"idRoutine",
+            "required":"true",
+            "schema":{
+              "type":"string",
+              "example":"640f22fa76e66261ea761bb6"
+            },
+            "description":"Id of Routine"
+          },
           {
             "name": "Authorization",
             "in": "header",
@@ -655,15 +725,25 @@
         "security": []
       }
     },
-    "/routine/:idUser": {
+    "/routine/{idUser}": {
       "get": {
         "tags": [
           "Routine"
         ],
         "summary": "Get Routine",
-        "description": "",
+        "description": "Get all routines by idUser param",
         "operationId": "GetRoutine",
         "parameters": [
+          {
+            "in":"path",
+            "name":"idUser",
+            "required":"true",
+            "schema":{
+              "type":"string",
+              "example":"640f22fa76e66261ea761bb6"
+            },
+            "description":"Id of User"
+          },
           {
             "name": "Authorization",
             "in": "header",
@@ -685,13 +765,184 @@
                 "schema": {
                   "type":"object",
                   "properties": {
-                    "msg":{
-                      "type":"string"
+                    "routine":{
+                      "type":"array",
+                      "items":{
+                      "intervals":{
+                        "type":"array",
+                          "items":{
+                            "_id":{
+                              "type":"string"
+                            },
+                            "idUser":{
+                              "type":"string"
+                            },
+                            "type":"object",
+                            "properties":{
+                              "initial":{
+                                "type":"integer"
+                              },
+                              "ending":{
+                                "type":"integer"
+                              },
+                              "label":{
+                                "type":"string"
+                              },                          
+                              "_id":{
+                                "type":"string"
+                              }                          
+                            }
+                          }
+                        }
+                      }
                     }
                   }
                 },
                 "example":{
-                  "msg": "Grupo deletado com sucesso"
+                  "routine": [
+                    {
+                      "_id": "6408956a9c69ae2e8d8e0be6",
+                      "idUser": "640894d630562557a6dc3efe",
+                      "intervals": [
+                        {
+                          "initial": 0,
+                          "ending": 20,
+                          "label": "birucando",
+                          "_id": "640897b3d54d76001e3fd455"
+                        },
+                        {
+                          "initial": 20,
+                          "ending": 50,
+                          "label": "tempo livre",
+                          "_id": "640897b3d54d76001e3fd456"
+                        },
+                        {
+                          "initial": 50,
+                          "ending": 100,
+                          "label": "zurucando",
+                          "_id": "640897b3d54d76001e3fd457"
+                        },
+                        {
+                          "initial": 100,
+                          "ending": 86400000,
+                          "label": "tempo livre",
+                          "_id": "640897b3d54d76001e3fd458"
+                        }
+                      ],
+                      "__v": 2
+                    },
+                    {
+                      "_id": "640897d1d54d76001e3fd45f",
+                      "idUser": "640894d630562557a6dc3efe",
+                      "intervals": [
+                        {
+                          "initial": 0,
+                          "ending": 10,
+                          "label": "tempo livre",
+                          "_id": "640897d1d54d76001e3fd460"
+                        },
+                        {
+                          "initial": 10,
+                          "ending": 50,
+                          "label": "mamae",
+                          "_id": "640897d1d54d76001e3fd461"
+                        },
+                        {
+                          "initial": 50,
+                          "ending": 200,
+                          "label": "bebezaochorao",
+                          "_id": "640897d1d54d76001e3fd462"
+                        },
+                        {
+                          "initial": 200,
+                          "ending": 150000,
+                          "label": "abluble",
+                          "_id": "640897d1d54d76001e3fd463"
+                        },
+                        {
+                          "initial": 150000,
+                          "ending": 86400000,
+                          "label": "tempo livre",
+                          "_id": "640897d1d54d76001e3fd464"
+                        }
+                      ],
+                      "__v": 0
+                    },
+                    {
+                      "_id": "640cebc807ede19cd50eccb8",
+                      "idUser": "640894d630562557a6dc3efe",
+                      "intervals": [
+                        {
+                          "initial": 0,
+                          "ending": 10,
+                          "label": "tempo livre",
+                          "_id": "640cebc807ede19cd50eccb9"
+                        },
+                        {
+                          "initial": 10,
+                          "ending": 50,
+                          "label": "mamae&PAPAI",
+                          "_id": "640cebc807ede19cd50eccba"
+                        },
+                        {
+                          "initial": 50,
+                          "ending": 200,
+                          "label": "bebezaochorao",
+                          "_id": "640cebc807ede19cd50eccbb"
+                        },
+                        {
+                          "initial": 200,
+                          "ending": 150000,
+                          "label": "abluble",
+                          "_id": "640cebc807ede19cd50eccbc"
+                        },
+                        {
+                          "initial": 150000,
+                          "ending": 86400000,
+                          "label": "tempo livre",
+                          "_id": "640cebc807ede19cd50eccbd"
+                        }
+                      ],
+                      "__v": 0
+                    },
+                    {
+                      "_id": "640f22fa76e66261ea761bb4",
+                      "idUser": "640894d630562557a6dc3efe",
+                      "intervals": [
+                        {
+                          "initial": 0,
+                          "ending": 10,
+                          "label": "tempo livre",
+                          "_id": "640f22fa76e66261ea761bb5"
+                        },
+                        {
+                          "initial": 10,
+                          "ending": 50,
+                          "label": "mamae&PAPAI",
+                          "_id": "640f22fa76e66261ea761bb6"
+                        },
+                        {
+                          "initial": 50,
+                          "ending": 200,
+                          "label": "bebezaochorao",
+                          "_id": "640f22fa76e66261ea761bb7"
+                        },
+                        {
+                          "initial": 200,
+                          "ending": 150000,
+                          "label": "abluble",
+                          "_id": "640f22fa76e66261ea761bb8"
+                        },
+                        {
+                          "initial": 150000,
+                          "ending": 86400000,
+                          "label": "tempo livre",
+                          "_id": "640f22fa76e66261ea761bb9"
+                        }
+                      ],
+                      "__v": 0
+                    }
+                  ]
                 }
               }
             }
@@ -701,15 +952,25 @@
         "security": []
       }
     },
-    "/routine/6408956a9c69ae2e8d8e0be6": {
+    "/routine/{id_Routine}": {
       "put": {
         "tags": [
           "Routine"
         ],
         "summary": "New Request",
-        "description": "",
+        "description": "Update routine using id_Routine. Free times are automatically generated",
         "operationId": "PutNewRequest",
         "parameters": [
+          {
+            "in":"path",
+            "name":"id_Routine",
+            "required":"true",
+            "schema":{
+              "type":"string",
+              "example":"640f22fa76e66261ea761bb6"
+            },
+            "description":"Id of Routine"
+          },
           {
             "name": "Authorization",
             "in": "header",
@@ -772,8 +1033,18 @@
             "description": "",
             "headers": {},
             "content": {
-              "text/plain": {
-                "schema": {}
+              "application/json": {
+                "schema": {
+                  "type":"object",
+                  "properties": {
+                    "msg":{
+                      "type":"string"
+                    }
+                  }
+                },
+                "example":{
+                  "msg": "Rotina deletada com sucesso"
+                }
               }
             }
           }
