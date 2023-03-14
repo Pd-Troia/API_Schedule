@@ -87,13 +87,13 @@
         "security": []
       }
     },
-    "/usergroup/getusergroup/640894d630562557a6dc3efe": {
+    "/usergroup/getusergroup/:idUser": {
       "get": {
         "tags": [
           "UserGroup"
         ],
         "summary": "Get Groups by idUser",
-        "description": "",
+        "description": "Get all user groups of user by given idUser in params",
         "operationId": "GetGroupsbyidUser",
         "parameters": [
           {
@@ -113,8 +113,68 @@
             "description": "",
             "headers": {},
             "content": {
-              "text/plain": {
-                "schema": {}
+              "application/json": {
+                "schema": {
+                  "type":"object",
+                  "properties": {
+                    "groups":{
+                      "type": "array",
+                      "items":{
+                        "_id":{
+                          "type":"string"
+                        },
+                        "admin":{
+                          "type":"string"
+                        },
+                        "members":{
+                          "type":"array",
+                          "items":{
+                            "idUser":{
+                              "type":"string"
+                            },
+                            "idRoutine":{
+                              "type":"string"
+                            },
+                            "_id":{
+                              "type":"string"
+                            }
+                          }
+                        }
+                      },                     
+                      "__v":{
+                        "type":"integer"
+                      }
+                    }
+                  }
+                },
+                "example":{
+                  "groups": [
+                    {
+                      "_id": "6409c707ba9e16f5fec2eb0b",
+                      "admin": "64009ba1410e61f3b53c5457",
+                      "members": [
+                        {
+                          "idUser": "640894d630562557a6dc3efe",
+                          "idRoutine": "6408956a9c69ae2e8d8e0be6",
+                          "_id": "6409c707ba9e16f5fec2eb0c"
+                        }
+                      ],
+                      "__v": 0
+                    },
+                    {
+                      "_id": "640b8b79f1b6a44dac533ce5",
+                      "admin": "640894d630562557a6dc3efe",
+                      "members": [
+                        {
+                          "idUser": "640894d630562557a6dc3efe",
+                          "idRoutine": "6408956a9c69ae2e8d8e0be6",
+                          "_id": "640b8b79f1b6a44dac533ce6"
+                        }
+                      ],
+                      "__v": 0
+                    }
+                  ]
+                }
               }
             }
           }
@@ -123,13 +183,13 @@
         "security": []
       }
     },
-    "/usergroup/updateadmin/6409c707ba9e16f5fec2eb0b": {
+    "/usergroup/updateadmin/:idUserGroup": {
       "patch": {
         "tags": [
           "UserGroup"
         ],
         "summary": "Update Admin",
-        "description": "",
+        "description": "Change Admin of User Group by given idUserGroup in params",
         "operationId": "UpdateAdmin",
         "parameters": [
           {
@@ -169,11 +229,21 @@
         },
         "responses": {
           "200": {
-            "description": "",
+            "description": "A confirm message",
             "headers": {},
             "content": {
-              "text/plain": {
-                "schema": {}
+              "application/json": {
+                "schema": {
+                  "type":"object",
+                  "properties": {
+                    "msg":{
+                      "type":"string"
+                    }
+                  }
+                },
+                "example":{
+                  "msg": "Admin alterado com sucesso"
+                }
               }
             }
           }
@@ -182,7 +252,7 @@
         "security": []
       }
     },
-    "/usergroup/insertmember/640b8b79f1b6a44dac533ce5": {
+    "/usergroup/insertmember/:idUserGroup": {
       "patch": {
         "tags": [
           "UserGroup"
@@ -230,11 +300,21 @@
         },
         "responses": {
           "200": {
-            "description": "",
+            "description": "A confirm message",
             "headers": {},
             "content": {
-              "text/plain": {
-                "schema": {}
+              "application/json": {
+                "schema": {
+                  "type":"object",
+                  "properties": {
+                    "msg":{
+                      "type":"string"
+                    }
+                  }
+                },
+                "example":{
+                  "msg": "Membro inserido com sucesso"
+                }
               }
             }
           }
@@ -243,7 +323,7 @@
         "security": []
       }
     },
-    "/usergroup/deletemember/640b8b79f1b6a44dac533ce5": {
+    "/usergroup/deletemember/:idUserGroup": {
       "patch": {
         "tags": [
           "UserGroup"
@@ -289,11 +369,21 @@
         },
         "responses": {
           "200": {
-            "description": "",
+            "description": "A confirm message",
             "headers": {},
             "content": {
-              "text/plain": {
-                "schema": {}
+              "application/json": {
+                "schema": {
+                  "type":"object",
+                  "properties": {
+                    "msg":{
+                      "type":"string"
+                    }
+                  }
+                },
+                "example":{
+                  "msg": "Membro removido com sucesso"
+                }
               }
             }
           }
@@ -302,7 +392,7 @@
         "security": []
       }
     },
-    "/usergroup/deletegroup/6409c707ba9e16f5fec2eb0b": {
+    "/usergroup/deletegroup/:idUserGroup": {
       "delete": {
         "tags": [
           "UserGroup"
@@ -325,11 +415,21 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "A confirm message ",
             "headers": {},
             "content": {
-              "text/plain": {
-                "schema": {}
+              "application/json": {
+                "schema": {
+                  "type":"object",
+                  "properties": {
+                    "msg":{
+                      "type":"string"
+                    }
+                  }
+                },
+                "example":{
+                  "msg": "Grupo deletado com sucesso"
+                }
               }
             }
           }
@@ -338,13 +438,13 @@
         "security": []
       }
     },
-    "/coincident/640897d1d54d76001e3fd45f&6408956a9c69ae2e8d8e0be6": {
+    "/coincident/:idsRoutine": {
       "get": {
         "tags": [
           "Routine"
         ],
         "summary": "getCoincidentTimes",
-        "description": "",
+        "description": "Receive multiple ids splited by '&'",
         "operationId": "getCoincidentTimes",
         "parameters": [
           {
@@ -361,11 +461,43 @@
         ],
         "responses": {
           "200": {
-            "description": "",
-            "headers": {},
             "content": {
-              "text/plain": {
-                "schema": {}
+              "application/json": {
+                "schema": {
+                  "type":"object",
+                  "properties": {
+                    "coincidentTimes":{
+                      "type":"array",
+                      "items":{
+                        "type":"object",
+                        "properties":{
+                          "initial":{
+                            "type":"integer"
+                          },
+                          "ending":{
+                            "type":"integer"
+                          },
+                          "label":{
+                            "type":"string"
+                          },                          
+                          "_id":{
+                            "type":"string"
+                          }                          
+                        }
+                      }
+                    }
+                  }
+                },
+                "example":{
+                  "msg": [
+                    {
+                      "initial": 0,
+                      "ending": 10,
+                      "label": "tempo livre",
+                      "_id": "640f22fa76e66261ea761bb5"
+                    }
+                  ]
+                }
               }
             }
           }
@@ -374,7 +506,7 @@
         "security": []
       }
     },
-    "/routine/63f923ead3a1ee01fcafbd30": {
+    "/routine/:idRoutine": {
       "delete": {
         "tags": [
           "Routine"
@@ -397,11 +529,21 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "A confirm message",
             "headers": {},
             "content": {
-              "text/plain": {
-                "schema": {}
+              "application/json": {
+                "schema": {
+                  "type":"object",
+                  "properties": {
+                    "msg":{
+                      "type":"string"
+                    }
+                  }
+                },
+                "example":{
+                  "msg": "Rotina deletada com sucesso"
+                }
               }
             }
           }
@@ -447,17 +589,17 @@
                         {
                           "initial": 10,
                           "ending": 50,
-                          "label": "mamae&PAPAI"
+                          "label": "acordando"
                         },
                         {
                           "initial": 50,
                           "ending": 200,
-                          "label": "bebezaochorao"
+                          "label": "tomando café"
                         },
                         {
                           "initial": 200,
                           "ending": 150000,
-                          "label": "abluble"
+                          "label": "trabalhando"
                         }
                       ]
                     }
@@ -470,17 +612,17 @@
                   {
                     "initial": 10,
                     "ending": 50,
-                    "label": "mamae&PAPAI"
+                    "label": "acordando"
                   },
                   {
                     "initial": 50,
                     "ending": 200,
-                    "label": "bebezaochorao"
+                    "label": "tomando café"
                   },
                   {
                     "initial": 200,
                     "ending": 150000,
-                    "label": "abluble"
+                    "label": "trabalhando"
                   }
                 ]
               }
@@ -490,11 +632,21 @@
         },
         "responses": {
           "200": {
-            "description": "",
+            "description": "A confirm message",
             "headers": {},
             "content": {
-              "text/plain": {
-                "schema": {}
+              "application/json": {
+                "schema": {
+                  "type":"object",
+                  "properties": {
+                    "msg":{
+                      "type":"string"
+                    }
+                  }
+                },
+                "example":{
+                  "msg": "Rotina criada com sucesso"
+                }
               }
             }
           }
@@ -503,7 +655,7 @@
         "security": []
       }
     },
-    "/routine/640894d630562557a6dc3efe": {
+    "/routine/:idUser": {
       "get": {
         "tags": [
           "Routine"
@@ -526,11 +678,21 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "A array of routines by idUser params",
             "headers": {},
             "content": {
-              "text/plain": {
-                "schema": {}
+              "application/json": {
+                "schema": {
+                  "type":"object",
+                  "properties": {
+                    "msg":{
+                      "type":"string"
+                    }
+                  }
+                },
+                "example":{
+                  "msg": "Grupo deletado com sucesso"
+                }
               }
             }
           }

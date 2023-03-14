@@ -23,7 +23,7 @@ const validateGet = async(req,res,next)=>{
         return res.status(404).json({msg:'usuário não encontrado'})
     }
     if(!mongoose.Types.ObjectId.isValid(idUser)){
-        return res.status(400).json({msg:"O id fornecido para deletar é inválido"})
+        return res.status(400).json({msg:"O id fornecido para requisitar a rotina é inválido"})
     }
     next()
 }
