@@ -13,40 +13,40 @@ router.get('/',(req,res)=> res.status(200).json({msg:'api working'}))
 
 //create day schedule
 router.post('/routine',     
-    validateRoutineMiddleware.validatePost, 
     authenticationMiddleware.authenticateUser,
+    validateRoutineMiddleware.validatePost, 
     authorizationMiddleware.confirmRoutineOwnerByIdRoutineBody,
     routineController.createRoutine
 )
 
 //get day schedule 
 router.get('/routine/:idUser',
-    validateRoutineMiddleware.validateGet,
     authenticationMiddleware.authenticateUser,
+    validateRoutineMiddleware.validateGet,
     authorizationMiddleware.confirmRoutineOwnerByIdUserParams,
     routineController.getRoutine
 )
 
 //remove day schedule
 router.delete('/routine/:idRoutine', 
-    validateRoutineMiddleware.validateDelete,
     authenticationMiddleware.authenticateUser,
+    validateRoutineMiddleware.validateDelete,
     authorizationMiddleware.confirmRoutineOwnerByIdRoutineParams,
     routineController.deleteRoutine
 )
 
 //Update Routine
 router.put('/routine/:idRoutine', 
-    validateRoutineMiddleware.validatePut,
     authenticationMiddleware.authenticateUser,
+    validateRoutineMiddleware.validatePut,
     authorizationMiddleware.confirmRoutineOwnerByIdRoutineParams,
     routineController.updateRoutine
 )
 
 //get coincident routime times
 router.get('/coincident/:idsRoutine',
-    validateRoutineMiddleware.validateGetCoincidentTimes,
     authenticationMiddleware.authenticateUser,
+    validateRoutineMiddleware.validateGetCoincidentTimes,
     authorizationMiddleware.confirmRoutineOwnerByMultipleIdRoutineParams,
     routineController.getCoincidingTimes
 )
@@ -57,8 +57,8 @@ router.get('/coincident/:idsRoutine',
 
 //Create Group
 router.post('/usergroup/creategroup',
-    validateUserGroupMiddleware.validateCreateUserGroup,
     authenticationMiddleware.authenticateUser,
+    validateUserGroupMiddleware.validateCreateUserGroup,
     authorizationMiddleware.confirmRoutineOwnerByIdRoutineBody, 
     authorizationMiddleware.confirmRoutineOwnerByIdRoutineBodyQueryBD,       
     userGroupController.creteUserGroup
@@ -66,23 +66,23 @@ router.post('/usergroup/creategroup',
 
 // Get User Group
 router.get('/usergroup/getusergroup/:idUser',
-    validateUserGroupMiddleware.validateGetUserGroup,
     authenticationMiddleware.authenticateUser,
+    validateUserGroupMiddleware.validateGetUserGroup,
     authorizationMiddleware.confirmRoutineOwnerByIdUserParams,
     userGroupController.getUserGroup,
 )
 
 //Delete User Group
 router.delete('/usergroup/deletegroup/:idUserGroup',
-    validateUserGroupMiddleware.validateDeleteUserGroup,
     authenticationMiddleware.authenticateUser, 
+    validateUserGroupMiddleware.validateDeleteUserGroup,
     authorizationMiddleware.confirmAdminUserGroup,
     userGroupController.deleteUserGroup)
 
 //Update Admin User Group
 router.patch('/usergroup/updateadmin/:idUserGroup', 
-    validateUserGroupMiddleware.validateUpdateAdminUserGroup,
     authenticationMiddleware.authenticateUser,
+    validateUserGroupMiddleware.validateUpdateAdminUserGroup,
     authorizationMiddleware.confirmAdminUserGroup,
     userGroupController.updateAdminUserGroup 
 )
