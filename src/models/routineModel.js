@@ -1,7 +1,8 @@
 const mongoose = require('mongoose')
 const schema = mongoose.Schema({
     idUser: {type: mongoose.Types.ObjectId, ref: "User"},
-    intervals: [{initial: Number, ending: Number, label: String}]
+    intervals: [{initial: Number, ending: Number, label: String}],
+    label: String
 })
 const Routine = mongoose.model("Routine", schema )
 
@@ -16,9 +17,9 @@ const updateRoutineIntervals = async (id,intervals)=>{
         throw new Error('Error to update routine')
     }
 }
-const createRoutine = async (idUser,intervals) =>{
+const createRoutine = async (idUser,label,intervals) =>{
     try{        
-        const routine = await Routine({idUser,intervals})
+        const routine = await Routine({idUser,label,intervals})
         await routine.save()
         return routine
     }catch(err){

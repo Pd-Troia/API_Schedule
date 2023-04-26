@@ -3,10 +3,10 @@ const generateFreeTime = require('../services/generate_free_time/generateFreeTim
 const intervalsOnCommun = require('../services/coindicent_times/intervalsOnCommun')
 
 const createRoutine = async(req,res) =>{
-    const {idUser,intervals} = req.body  
+    const {idUser,label,intervals} = req.body  
     const newInterval = generateFreeTime(intervals)      
     try{
-        await routineModel.createRoutine(idUser,newInterval)
+        await routineModel.createRoutine(idUser,label,newInterval)
         return res.status(200).json({msg:"Rotina criada com sucesso"})
     }catch(err){
         console.log(err)

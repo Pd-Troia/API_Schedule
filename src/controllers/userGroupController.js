@@ -1,8 +1,8 @@
 const userGroupModel = require('../models/userGroupModel')
 const creteUserGroup = async(req,res) =>{ 
-    const {idUser,idRoutine} = req.body
+    const {idUser,label,idRoutine} = req.body
     try{
-        await userGroupModel.createUserGroup(idUser, idRoutine)
+        await userGroupModel.createUserGroup(idUser,label,idRoutine)
         return res.status(200).json({msg:"Grupo criado com sucesso"})
     }catch(err){
         console.log(err)
