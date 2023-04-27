@@ -28,9 +28,12 @@ const validateGet = async(req,res,next)=>{
     next()
 }
 const validatePost = async(req,res,next) => {
-    const {idUser,intervals} = req.body
+    const {idUser,intervals,label} = req.body
     if(!idUser){
         return res.status(404).json({msg:"idUser não informado"})
+    }
+    if(!label){
+        return res.status(404).json({msg:"Label não informada"})
     }
     if(!mongoose.Types.ObjectId.isValid(idUser)){
         return res.status(400).json({msg:"O idUser é inválido"})

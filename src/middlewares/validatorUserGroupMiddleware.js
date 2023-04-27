@@ -4,6 +4,7 @@ const userGroupValidator = require("../services/validations/userGroupValidator")
 const vPUsermsg = "Id User não foi enviado"
 const vPRoutineMsg = "Id Routine não foi enviado"
 const vPUserGroupMsg = "Id User Group não foi enviado"
+const vPLabelGroupMsg = "Label não foi enviada"
 //ObjectID
 const vOUserMsg = "O Id User enviado não é válido"
 const vORoutineMsg = "O Id User enviado não é válido"
@@ -18,8 +19,9 @@ const vRUserMsg = "O usuário não pertence no  grupo"
 const vRAdminMsg = "Não é possivel remover o admin do grupo"
 //validadte responses
 const validateCreateUserGroup = async(req,res,next) => {
-    const {idUser,idRoutine} = req.body
+    const {idUser,label,idRoutine} = req.body
     if(userGroupValidator.vPayload(res,idUser,vPUsermsg)){return}
+    if(userGroupValidator.vPayload(res,label,vPLabelGroupMsg)){return}
     if(userGroupValidator.vPayload(res,idRoutine,vPRoutineMsg)){return}    
     if(userGroupValidator.vObjectId(res,idUser,vOUserMsg)){return}
     if(userGroupValidator.vObjectId(res,idRoutine,vORoutineMsg)){return}   
