@@ -4,7 +4,7 @@ const schema = mongoose.Schema({
     idSender: mongoose.Types.ObjectId,
     idUserGroup: mongoose.Types.ObjectId 
 })
-const Notification = mongoose.model(notification,schema)
+const Notification = mongoose.model("notification",schema)
 
 const createNotification = async(idUser,idSender,idUserGroup) =>{
     try{
