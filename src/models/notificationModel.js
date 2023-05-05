@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
 const schema = mongoose.Schema({
-    idUser: mongoose.Types.ObjectId,    
-    idSender: mongoose.Types.ObjectId,
-    idUserGroup: mongoose.Types.ObjectId 
+    idUser: {type: mongoose.Types.ObjectId, ref:"User"},    
+    idSender: {type: mongoose.Types.ObjectId,ref:"User"},
+    idUserGroup: {type: mongoose.Types.ObjectId,ref:"UserGroup"} 
 })
 const Notification = mongoose.model("notification",schema)
 
@@ -26,7 +26,7 @@ const deleteNotification = async(idNotification)=>{
     }
 }
 
-const getNotificationByIdUser = async(idUser)=>{
+const getNotificationByEmail = async(idUser)=>{
     try{
         const notification = await Notification.find({idUser})
         return notification
@@ -36,4 +36,4 @@ const getNotificationByIdUser = async(idUser)=>{
     }
 }
 
-module.exports = {getNotificationByIdUser,createNotification,deleteNotification}
+module.exports = {getNotificationByEmail,createNotification,deleteNotification}

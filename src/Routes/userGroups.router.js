@@ -3,56 +3,56 @@ const userGroupController = require('../controllers/userGroupController')
 const validateUserGroupMiddleware = require('../middlewares/validatorUserGroupMiddleware')
 const authorizationMiddleware = require('../middlewares/authorizationMiddleware')
 const authenticationMiddleware = require('../middlewares/authenticationMiddleware')
-
+const isDev = require("../services/routes_functions/isDev")
 
 const router = express.Router()
 
 //Create Group
 router.post('/usergroup/creategroup',
-    authenticationMiddleware.authenticateUser,
+    isDev(authenticationMiddleware.authenticateUser),
     validateUserGroupMiddleware.validateCreateUserGroup,
-    authorizationMiddleware.confirmRoutineOwnerByIdRoutineBody, 
-    authorizationMiddleware.confirmRoutineOwnerByIdRoutineBodyQueryBD,       
+    isDev(authorizationMiddleware.confirmRoutineOwnerByIdRoutineBody), 
+    isDev(authorizationMiddleware.confirmRoutineOwnerByIdRoutineBodyQueryBD),       
     userGroupController.creteUserGroup
 )
 
 // Get User Group
 router.get('/usergroup/getusergroup/:idUser',
-    authenticationMiddleware.authenticateUser,
+    isDev(authenticationMiddleware.authenticateUser),
     validateUserGroupMiddleware.validateGetUserGroup,
-    authorizationMiddleware.confirmRoutineOwnerByIdUserParams,
+    isDev(authorizationMiddleware.confirmRoutineOwnerByIdUserParams),
     userGroupController.getUserGroup,
 )
 
 //Delete User Group
 router.delete('/usergroup/deletegroup/:idUserGroup',
-    authenticationMiddleware.authenticateUser, 
+    isDev(authenticationMiddleware.authenticateUser), 
     validateUserGroupMiddleware.validateDeleteUserGroup,
-    authorizationMiddleware.confirmAdminUserGroup,
+    isDev(authorizationMiddleware.confirmAdminUserGroup),
     userGroupController.deleteUserGroup)
 
 //Update Admin User Group
 router.patch('/usergroup/updateadmin/:idUserGroup', 
-    authenticationMiddleware.authenticateUser,
+    isDev(authenticationMiddleware.authenticateUser),
     validateUserGroupMiddleware.validateUpdateAdminUserGroup,
-    authorizationMiddleware.confirmAdminUserGroup,
+    isDev(authorizationMiddleware.confirmAdminUserGroup),
     userGroupController.updateAdminUserGroup 
 )
 
 //Insert Member in Group
 router.patch('/usergroup/insertmember/:idUserGroup', 
-    authenticationMiddleware.authenticateUser,
+    isDev(authenticationMiddleware.authenticateUser),
     validateUserGroupMiddleware.validateInsertMember,
-    authorizationMiddleware.confirmAdminUserGroup,
-    authorizationMiddleware.confirmRoutineOwnerByIdRoutineIdUserBody,
+    isDev(authorizationMiddleware.confirmAdminUserGroup),
+    isDev(authorizationMiddleware.confirmRoutineOwnerByIdRoutineIdUserBody),
     userGroupController.insertMember
 )
 
 //Remove Member in group
 router.patch('/usergroup/deletemember/:idUserGroup', 
-    authenticationMiddleware.authenticateUser,
+    isDev(authenticationMiddleware.authenticateUser),
     validateUserGroupMiddleware.validateDeleteMember,    
-    authorizationMiddleware.confirmAdminUserGroup,    
+    isDev(authorizationMiddleware.confirmAdminUserGroup),    
     userGroupController.deleteMember
 )
 

@@ -3,6 +3,7 @@ const routineController = require('../controllers/routineController')
 const validateRoutineMiddleware = require('../middlewares/validatorRoutineMiddleware')
 const authorizationMiddleware = require('../middlewares/authorizationMiddleware')
 const authenticationMiddleware = require('../middlewares/authenticationMiddleware')
+const isDev = require("../services/routes_functions/isDev")
 
 const router = express.Router()
 
@@ -11,41 +12,41 @@ router.get('/',(req,res)=> res.status(200).json({msg:'api working'}))
 
 //create day schedule
 router.post('/routine',     
-    authenticationMiddleware.authenticateUser,
+    isDev(authenticationMiddleware.authenticateUser),
     validateRoutineMiddleware.validatePost, 
-    authorizationMiddleware.confirmRoutineOwnerByIdRoutineBody,
+    isDev(authorizationMiddleware.confirmRoutineOwnerByIdRoutineBody),
     routineController.createRoutine
 )
 
 //get day schedule 
 router.get('/routine/:idUser',
-    authenticationMiddleware.authenticateUser,
+    isDev(authenticationMiddleware.authenticateUser),
     validateRoutineMiddleware.validateGet,
-    authorizationMiddleware.confirmRoutineOwnerByIdUserParams,
+    isDev(authorizationMiddleware.confirmRoutineOwnerByIdUserParams),
     routineController.getRoutine
 )
 
 //remove day schedule
 router.delete('/routine/:idRoutine', 
-    authenticationMiddleware.authenticateUser,
+    isDev(authenticationMiddleware.authenticateUser),
     validateRoutineMiddleware.validateDelete,
-    authorizationMiddleware.confirmRoutineOwnerByIdRoutineParams,
+    isDev(authorizationMiddleware.confirmRoutineOwnerByIdRoutineParams),
     routineController.deleteRoutine
 )
 
 //Update Routine
 router.put('/routine/:idRoutine', 
-    authenticationMiddleware.authenticateUser,
+    isDev(authenticationMiddleware.authenticateUser),
     validateRoutineMiddleware.validatePut,
-    authorizationMiddleware.confirmRoutineOwnerByIdRoutineParams,
+    isDev(authorizationMiddleware.confirmRoutineOwnerByIdRoutineParams),
     routineController.updateRoutine
 )
 
 //get coincident routime times
 router.get('/coincident/:idsRoutine',
-    authenticationMiddleware.authenticateUser,
+    isDev(authenticationMiddleware.authenticateUser),
     validateRoutineMiddleware.validateGetCoincidentTimes,
-    authorizationMiddleware.confirmRoutineOwnerByMultipleIdRoutineParams,
+    isDev(authorizationMiddleware.confirmRoutineOwnerByMultipleIdRoutineParams),
     routineController.getCoincidingTimes
 )
 
