@@ -1,14 +1,15 @@
 const mongoose = require('mongoose')
+
 const schema = mongoose.Schema({
-    idUser: {type: mongoose.Types.ObjectId, ref:"User"},    
-    idSender: {type: mongoose.Types.ObjectId,ref:"User"},
+    idSender: {type: mongoose.Types.ObjectId, ref:"User"},    
+    idTarget: {type: mongoose.Types.ObjectId,ref:"User"},
     idUserGroup: {type: mongoose.Types.ObjectId,ref:"UserGroup"} 
 })
 const Notification = mongoose.model("notification",schema)
 
-const createNotification = async(idUser,idSender,idUserGroup) =>{
+const createNotification = async(idSender,idTarget,idUserGroup) =>{
     try{
-        const notification = Notification({idUser,idSender,idUserGroup})
+        const notification = Notification({idSender,idTarget,idUserGroup})
         await notification.save()
         return notification
     }catch(err){
@@ -26,9 +27,33 @@ const deleteNotification = async(idNotification)=>{
     }
 }
 
-const getNotificationByEmail = async(idUser)=>{
+const getNotificationByEmail = async(email)=>{
     try{
-        const notification = await Notification.find({idUser})
+        const notification = await Notification.aggregate(
+            [
+                {
+                    $lookup:
+                    {
+                        from:"users",
+                        localField:"idUser",
+                        foreignField: "_id",
+                        as: "userNotifications"
+                    }
+                },
+                {
+                    $match:
+                    {
+                        'userNotifications.email':email
+                    }
+                },
+                {
+                    $project: {
+                        userNotifications:0
+                    }
+                  }
+            ]
+        )
+        console.log(notification)
         return notification
     }catch(err){
         console.log(err)

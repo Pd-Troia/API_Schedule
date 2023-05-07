@@ -12,7 +12,8 @@ router.post("/notification",
 
 //get notification "web socket"
 router.get("/notification",
-    isDev(authenticateUser)
+    isDev(authenticateUser),
+    notificationController.getNotification
 )
 
 //Delete notification 
