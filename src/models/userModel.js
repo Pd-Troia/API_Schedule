@@ -8,11 +8,11 @@ const schema = mongoose.Schema({
     failedAttempts: Number,
     blockTimestamp: Number, 
 })
-const user = mongoose.model('User', schema)
+const User = mongoose.model('User', schema)
 
 const getUser = async(idUser) =>{
     try{
-        const query = await user.findById(idUser)                
+        const query = await User.findById(idUser)                
         return query    
     }catch(err){
         console.log(err)
@@ -21,5 +21,6 @@ const getUser = async(idUser) =>{
 }
 
 module.exports = {
-    getUser,    
+    getUser,
+    User    
 }

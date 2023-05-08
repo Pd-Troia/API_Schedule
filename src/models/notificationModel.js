@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const {User} = require('./userModel')
 
 const schema = mongoose.Schema({
     idSender: {type: mongoose.Types.ObjectId, ref:"User"},    
@@ -7,10 +8,12 @@ const schema = mongoose.Schema({
 })
 const Notification = mongoose.model("notification",schema)
 
-const createNotification = async(idSender,idTarget,idUserGroup) =>{
+const createNotification = async(idSender,email,idUserGroup) =>{
     try{
-        const notification = Notification({idSender,idTarget,idUserGroup})
-        await notification.save()
+        const idTarget = (await User.findOne({email}))._id
+        const notification = Notification({idSender,idTarget,idUserGroup})      
+        await notification.save()  
+        console.log(notification)          
         return notification
     }catch(err){
         console.log(err)

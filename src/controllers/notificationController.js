@@ -1,9 +1,9 @@
 const notificationModel = require('../models/notificationModel')
 
 const createNotification = async(req,res)=>{    
-    const {idSender,idTarget,idUserGroup} = req.body
+    const {idSender,email,idUserGroup} = req.body
     try{
-        await notificationModel.createNotification(idSender,idTarget,idUserGroup)
+        await notificationModel.createNotification(idSender,email,idUserGroup)
         res.status(200).json({msg:"Notificação criada com sucesso"})
     }catch(err){
         res.status(400).json({msg:"Ocorreu um erro ao tentar criar a notificação"})
