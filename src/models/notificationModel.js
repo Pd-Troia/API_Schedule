@@ -30,38 +30,14 @@ const deleteNotification = async(idNotification)=>{
     }
 }
 
-const getNotificationByEmail = async(email)=>{
+const getNotification = async(IdUser)=>{
     try{
-        const notification = await Notification.aggregate(
-            [
-                {
-                    $lookup:
-                    {
-                        from:"users",
-                        localField:"idTarget",
-                        foreignField: "_id",
-                        as: "userNotifications"
-                    }
-                },
-                {
-                    $match:
-                    {
-                        'userNotifications.email':email
-                    }
-                },
-                {
-                    $project: {
-                        userNotifications:0
-                    }
-                  }
-            ]
-        )
-        console.log(notification)
-        return notification
+        const notifications = Notification.find({idTarget:IdUser})
+        return notifications
     }catch(err){
         console.log(err)
-        throw(err)
+        throw err
     }
 }
 
-module.exports = {getNotificationByEmail,createNotification,deleteNotification}
+module.exports = {getNotification,createNotification,deleteNotification}

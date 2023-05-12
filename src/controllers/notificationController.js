@@ -19,10 +19,10 @@ const deleteNotification = async(req,res)=>{
     }
 }
  const getNotification = async(req,res)=>{
-    const {email} = req.body
-    try{
-        const notifications = await notificationModel.getNotificationByEmail(email)
-        res.status(200).json(notifications)
+    const {idUser} = req.body      
+    try{        
+        const notifications = await notificationModel.getNotification(idUser)            
+        return res.status(200).json({notificaions: notifications})        
     }catch(err){
         console.log(err)
     }
