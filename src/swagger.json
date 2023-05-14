@@ -13,9 +13,82 @@
     {
       "url": "localhost:3333",
       "variables": {}
-    }
+    }    
   ],
-  "paths": {
+  "paths": {    
+    "/notification": {
+      "post": {
+        "tags": [
+          "Notification"
+        ],
+        "summary":"Create Notification",
+        "description":"Create a Notification using ids of sender and target and id group of sender",
+        "operationId": "Notification",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "Baerer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MDg5NGQ2MzA1NjI1NTdhNmRjM2VmZSIsImlhdCI6MTY3ODI4NDAxNX0.Z4yqoWzYcQI2VkmxlZ3T32_syPce7hk_hV_Cee7yZ8g"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/CreateNotification"
+                  },
+                  {
+                    "example": {
+                      "idSender": "640894d630562557a6dc3efe",
+                      "email": "teste@gmail.com",
+                      "idUserGroup": "6408956a9c69ae2e8d8e0be6"
+                    }
+                  }
+                ]
+              },
+              "example": {
+                "idSender": "640894d630562557a6dc3efe",
+                "email": "teste@gmail.com",
+                "idUserGroup": "6408956a9c69ae2e8d8e0be6"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "A confirm message",
+            "headers": {},
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type":"object",
+                  "properties": {
+                    "msg":{
+                      "type":"string"
+                    }
+                  }
+                },
+                "example":{
+                  "msg":"Notificação criada com sucesso"
+                }
+              }
+            }            
+          }          
+        },
+        "deprecated": false,
+        "security": []
+      }
+    },
     "/usergroup/creategroup": {
       "post": {
         "tags": [
@@ -1056,6 +1129,31 @@
   },
   "components": {    
     "schemas": {
+      "CreateNotification": {
+        "title": "CreateNotification",
+        "required": [
+          "idSender",
+          "email",
+          "idUserGroup"
+        ],
+        "type": "object",
+        "properties": {
+          "idSender": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "idUserGroup": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "idUser": "640894d630562557a6dc3efe",
+          "email": "teste@gmail.com",
+          "idUserGroup": "6408956a9c69ae2e8d8e0be6"
+        }
+      },      
       "CreateGroupRequest": {
         "title": "CreateGroupRequest",
         "required": [
@@ -1201,15 +1299,15 @@
   "tags": [
     {
       "name": "UserGroup",
-      "description": ""
+      "description": "Routes to manage User Groups"
     },
     {
       "name": "Routine",
-      "description": ""
+      "description": "Routes to manage Routines"
     },
     {
-      "name": "API Schedule",
-      "description": ""
+      "name": "Notification",
+      "description": "Routes to manage Notification"
     }
   ]
 }
