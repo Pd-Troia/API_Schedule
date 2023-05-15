@@ -89,6 +89,126 @@
         "security": []
       }
     },
+    "/notification/{idNotification}": {
+      "delete": {
+        "tags": [
+          "Notification"
+        ],
+        "summary":"Delete Notification",
+        "description":"Delete Notification using id of Notification",
+        "operationId": "Notification",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "Baerer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MDg5NGQ2MzA1NjI1NTdhNmRjM2VmZSIsImlhdCI6MTY3ODI4NDAxNX0.Z4yqoWzYcQI2VkmxlZ3T32_syPce7hk_hV_Cee7yZ8g"
+            }
+          },
+          {
+            "in":"path",
+            "name":"idNotification",
+            "required":"true",
+            "schema":{
+              "type":"string",
+              "example":"640f22fa76e66261ea761bb6"
+            },
+            "description":"Id of Notification"
+          }
+        ],        
+        "responses": {
+          "200": {
+            "description": "A confirm message",
+            "headers": {},
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type":"object",
+                  "properties": {
+                    "msg":{
+                      "type":"string"
+                    }
+                  }
+                },
+                "example":{
+                  "msg":"Notificação Deletada com sucesso"
+                }
+              }
+            }            
+          }          
+        },
+        "deprecated": false,
+        "security": []
+      }
+    },
+    "/notification/{idUser}": {
+      "get": {
+        "tags": [
+          "Notification"
+        ],
+        "summary":"Get Notifications",
+        "description":"Get Notifications of user using his id",
+        "operationId": "Notification",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "Baerer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MDg5NGQ2MzA1NjI1NTdhNmRjM2VmZSIsImlhdCI6MTY3ODI4NDAxNX0.Z4yqoWzYcQI2VkmxlZ3T32_syPce7hk_hV_Cee7yZ8g"
+            }
+          },
+          {
+            "in":"path",
+            "name":"idUser",
+            "required":"true",
+            "schema":{
+              "type":"string",
+              "example":"640f22fa76e66261ea761bb6"
+            },
+            "description":"Id of Notification"
+          }
+        ],        
+        "responses": {
+          "200": {
+            "description": "A confirm message",
+            "headers": {},
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type":"object",
+                  "properties": {
+                    "msg":{
+                      "type":"string"
+                    }
+                  }
+                },
+                "example":{
+                  "notificaions": [
+                    {
+                      "_id": "6456ed8b4f7f10ae59ec7d1a",
+                      "idSender": "6456821e9435353d5724be4a",
+                      "idTarget": "645566a6630acdc2f3a75eda",
+                      "idUserGroup": "6456847bf0f358fdd9070e6d",
+                      "__v": 0
+                    }
+                  ]
+                }
+              }
+            }            
+          }          
+        },
+        "deprecated": false,
+        "security": []
+      }
+    },
     "/usergroup/creategroup": {
       "post": {
         "tags": [
