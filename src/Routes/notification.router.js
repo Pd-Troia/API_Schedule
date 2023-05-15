@@ -11,13 +11,13 @@ router.post("/notification",
 )
 
 //get notification "web socket"
-router.get("/notification",
+router.get("/notification/:idUser",
     isDev(authenticateUser),
     notificationController.getNotification
 )
 
 //Delete notification 
-router.delete("/notification",
+router.delete("/notification/:idNotification",
     isDev(authenticateUser),
     notificationController.deleteNotification
 )

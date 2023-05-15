@@ -10,7 +10,7 @@ const createNotification = async(req,res)=>{
     }
 }
 const deleteNotification = async(req,res)=>{
-    const {idNotification} = req.body
+    const idNotification = req.params.idNotification    
     try{
         await notificationModel.deleteNotification(idNotification)
         res.status(200).json({msg:"Notificação deletada com sucesso"})
@@ -19,7 +19,8 @@ const deleteNotification = async(req,res)=>{
     }
 }
  const getNotification = async(req,res)=>{
-    const {idUser} = req.body      
+    const idUser = req.params.idUser     
+    
     try{        
         const notifications = await notificationModel.getNotification(idUser)            
         return res.status(200).json({notificaions: notifications})        
