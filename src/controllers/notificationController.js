@@ -3,8 +3,11 @@ const notificationModel = require('../models/notificationModel')
 const createNotification = async(req,res)=>{    
     const {idSender,email,idUserGroup} = req.body
     try{
-        await notificationModel.createNotification(idSender,email,idUserGroup)
-        res.status(200).json({msg:"Notificação criada com sucesso"})
+        const query = await notificationModel.createNotification(idSender,email,idUserGroup)
+        if(query.upsertedId == null){
+            return res.status(409).json({msg:"Notificação já existe"})
+        }
+        return res.status(201).json({msg:"Notificação criada com sucesso"})
     }catch(err){
         res.status(400).json({msg:"Ocorreu um erro ao tentar criar a notificação"})
     }
@@ -19,7 +22,7 @@ const deleteNotification = async(req,res)=>{
     }
 }
  const getNotification = async(req,res)=>{
-    const idUser = req.params.idUser     
+    const idUser = req.params.idUser      
     
     try{        
         const notifications = await notificationModel.getNotification(idUser)            

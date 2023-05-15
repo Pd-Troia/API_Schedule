@@ -17,7 +17,7 @@ const validateCreateNotification = async(req,res,next)=>{
     if(!(await userModel.getUser(idSender))){return res.status(404).json({msg:"Usuário não encontrado pelo idSender"})}
     if(!(await userGroupModel.getUserGroupByUserGroupId(idUserGroup))){
         return res.status(404).json({msg:"UserGroup não encontrado pelo idUserGroup"})
-    }
+    }   
     next()
 }
 

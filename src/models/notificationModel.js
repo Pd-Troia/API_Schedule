@@ -11,10 +11,12 @@ const Notification = mongoose.model("notification",schema)
 const createNotification = async(idSender,email,idUserGroup) =>{
     try{
         const idTarget = (await User.findOne({email}))._id
-        const notification = Notification({idSender,idTarget,idUserGroup})      
-        await notification.save()  
-        console.log(notification)          
-        return notification
+        const query = await Notification.updateOne(
+            {idSender,idTarget,idUserGroup},
+            {$setOnInsert: {idSender, idTarget, idUserGroup}},
+            {upsert:true}
+        )                
+        return query
     }catch(err){
         console.log(err)
         throw(err)             
