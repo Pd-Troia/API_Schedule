@@ -19,8 +19,19 @@ const getUser = async(idUser) =>{
         throw new Error('Ocorreu um erro na consulta do User')
     }
 }
+const getUserByEmail = async(email) =>{
+    try{
+        const query = await User.findOne({email})                
+        return query    
+    }catch(err){
+        console.log(err)
+        throw new Error('Ocorreu um erro na consulta do User')
+    }
+}
+
 
 module.exports = {
     getUser,
+    getUserByEmail,
     User    
 }

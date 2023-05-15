@@ -40,4 +40,14 @@ const getNotification = async(IdUser)=>{
     }
 }
 
-module.exports = {getNotification,createNotification,deleteNotification}
+const getNotificationByidNotification = async(idNotification)=>{
+    try{
+        const notification = Notification.findById(idNotification)
+        return notification
+    }catch(err){
+        console.log(err)
+        throw err
+    }
+}
+
+module.exports = {getNotificationByidNotification,getNotification,createNotification,deleteNotification}
