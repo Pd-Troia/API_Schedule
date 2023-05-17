@@ -22,7 +22,7 @@ router.post('/routine',
 router.get('/routine/:idUser',
     isDev(authenticationMiddleware.authenticateUser),
     validateRoutineMiddleware.validateGet,
-    isDev(authorizationMiddleware.confirmRoutineOwnerByIdUserParams),
+    isDev(authorizationMiddleware.confirmIdentityByIdUserParams),
     routineController.getRoutine
 )
 
@@ -30,7 +30,7 @@ router.get('/routine/:idUser',
 router.delete('/routine/:idRoutine', 
     isDev(authenticationMiddleware.authenticateUser),
     validateRoutineMiddleware.validateDelete,
-    isDev(authorizationMiddleware.confirmIdentityByIdRoutineParams),
+    isDev(authorizationMiddleware.confirmRoutineOwnerByIdRoutineParams),
     routineController.deleteRoutine
 )
 
@@ -38,7 +38,7 @@ router.delete('/routine/:idRoutine',
 router.put('/routine/:idRoutine', 
     isDev(authenticationMiddleware.authenticateUser),
     validateRoutineMiddleware.validatePut,
-    isDev(authorizationMiddleware.confirmIdentityByIdRoutineParams),
+    isDev(authorizationMiddleware.confirmRoutineOwnerByIdRoutineParams),
     routineController.updateRoutine
 )
 
