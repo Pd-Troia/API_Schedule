@@ -1,6 +1,8 @@
 const routineModel = require('../models/routineModel')
 const userGroupModel = require('../models/userGroupModel')
-const confirmRoutineOwnerByIdUserParams = (req,res,next)=>{
+const notificationModel = require('../models/notificationModel')
+
+const confirmIdentityByIdUserParams = (req,res,next)=>{
     const idUserByAuth = req.user.id     
     if(idUserByAuth != req.params.idUser){
         return res.status(403).json({msg:"Identidade não autorizada"})
@@ -67,14 +69,35 @@ const confirmAdminUserGroup = async(req,res,next)=>{
     }
     next()
 }
+const confirmAdminUserGroupByBody = async(req,res,next)=>{
+    const {idSender,idUserGroup} = req.body
+    const idUserByAuth = req.user.id
+    const userGroup = await userGroupModel.getUserGroupByUserGroupId(idUserGroup)    
+    if(!((userGroup.admin.toString() == idSender ? idSender : false) === idUserByAuth)){
+        return res.status(403).json({msg:"É necessario ser admin do grupo para realizar essa operação"})
+    }
+    next()
+}
+const confirmOwnerNotification = async(req,res,next)=>{
+    const notification = await notificationModel.getNotificationByidNotification(req.body.idNotification)
+    const idUserByAuth = req.user.id    
+    if(idUserByAuth != notification.idTarget){
+        return res.status(403).json({msg:"Identidade não autorizada"})
+    }
+    next()
+}
+
+
 
 
 module.exports = {
-    confirmRoutineOwnerByIdUserParams,
+    confirmIdentityByIdUserParams,
     confirmRoutineOwnerByIdRoutineParams,
     confirmRoutineOwnerByMultipleIdRoutineParams,
     confirmRoutineOwnerByIdRoutineBody,
     confirmRoutineOwnerByIdRoutineBodyQueryBD,
     confirmAdminUserGroup,
-    confirmRoutineOwnerByIdRoutineIdUserBody
+    confirmRoutineOwnerByIdRoutineIdUserBody,
+    confirmAdminUserGroupByBody,
+    confirmOwnerNotification
 }

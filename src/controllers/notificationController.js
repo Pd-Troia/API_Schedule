@@ -22,8 +22,7 @@ const deleteNotification = async(req,res)=>{
     }
 }
  const getNotification = async(req,res)=>{
-    const idUser = req.params.idUser      
-    
+    const idUser = req.params.idUser       
     try{        
         const notifications = await notificationModel.getNotification(idUser)            
         return res.status(200).json({notificaions: notifications})        

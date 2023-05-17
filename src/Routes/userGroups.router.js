@@ -20,7 +20,7 @@ router.post('/usergroup/creategroup',
 router.get('/usergroup/getusergroup/:idUser',
     isDev(authenticationMiddleware.authenticateUser),
     validateUserGroupMiddleware.validateGetUserGroup,
-    isDev(authorizationMiddleware.confirmRoutineOwnerByIdUserParams),
+    isDev(authorizationMiddleware.confirmIdentityByIdUserParams),
     userGroupController.getUserGroup,
 )
 
