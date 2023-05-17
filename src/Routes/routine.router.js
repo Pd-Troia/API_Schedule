@@ -1,5 +1,5 @@
 const express = require('express')
-const routineController = require('../controllers/routineController')
+const routineController = require('../controllers/RoutineController')
 const validateRoutineMiddleware = require('../middlewares/validatorRoutineMiddleware')
 const authorizationMiddleware = require('../middlewares/authorizationMiddleware')
 const authenticationMiddleware = require('../middlewares/authenticationMiddleware')
