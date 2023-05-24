@@ -25,7 +25,7 @@ const deleteNotification = async(req,res)=>{
     const idUser = req.params.idUser       
     try{        
         const notifications = await notificationModel.getNotification(idUser)            
-        return res.status(200).json({notificaions: notifications})        
+        return res.status(200).json({notifications})        
     }catch(err){
         console.log(err)
     }
