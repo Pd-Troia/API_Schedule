@@ -197,7 +197,8 @@
                       "idSender": "6456821e9435353d5724be4a",
                       "idTarget": "645566a6630acdc2f3a75eda",
                       "idUserGroup": "6456847bf0f358fdd9070e6d",
-                      "__v": 0
+                      "userName": "Nome do Sender",
+                      "userGroupName": "Nome do grupo"                      
                     }
                   ]
                 }

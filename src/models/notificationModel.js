@@ -41,7 +41,7 @@ const getNotification = async(idUser)=>{
             {
                 $lookup:{
                     from:'users',
-                    localField:"idTarget",
+                    localField:"idSender",
                     foreignField:"_id",
                     as:"user"
                 },             
