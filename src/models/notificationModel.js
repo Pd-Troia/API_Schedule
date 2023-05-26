@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const {User} = require('./userModel')
 
 const schema = mongoose.Schema({
-    idSender: {type: mongoose.Types.ObjectId, ref:"User"},    
+    idSender: {type: mongoose.Types.ObjectId, ref:"User"},   
     idTarget: {type: mongoose.Types.ObjectId,ref:"User"},
     idUserGroup: {type: mongoose.Types.ObjectId,ref:"UserGroup"} 
 })
@@ -32,9 +32,39 @@ const deleteNotification = async(idNotification)=>{
     }
 }
 
-const getNotification = async(IdUser)=>{
-    try{
-        const notifications = Notification.find({idTarget:IdUser})
+const getNotification = async(idUser)=>{    
+    try{        
+        const notifications = Notification.aggregate([
+            {
+                $match:{idTarget:mongoose.Types.ObjectId(idUser)}
+            },
+            {
+                $lookup:{
+                    from:'users',
+                    localField:"idTarget",
+                    foreignField:"_id",
+                    as:"user"
+                },             
+            },
+            {
+                $lookup:{
+                    from:'usergroups',
+                    localField:"idUserGroup",
+                    foreignField:"_id",
+                    as:"usergroup"
+                }
+            },
+            {
+                $project:{                                       
+                    idSender:"$idSender",
+                    idTarget:"$idTarget",
+                    idUserGroup:"$idUserGroup",
+                    userName:{ $arrayElemAt: [ "$user.firstName", 0 ] },
+                    userGroupName: { $arrayElemAt: [ "$usergroup.label", 0 ] }
+                }
+            }
+        ])
+        
         return notifications
     }catch(err){
         console.log(err)
