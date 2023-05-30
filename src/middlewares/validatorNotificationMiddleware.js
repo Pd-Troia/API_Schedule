@@ -35,6 +35,7 @@ const validateDeleteNotification = async(req,res,next)=>{
     if(!notification){
         return res.status(404).json({msg:"Notificação não encontrada"})
     }
+    req.notification = notification
    next()
 }
 

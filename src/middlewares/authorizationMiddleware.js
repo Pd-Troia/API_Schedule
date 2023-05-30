@@ -79,7 +79,7 @@ const confirmAdminUserGroupByBody = async(req,res,next)=>{
     next()
 }
 const confirmOwnerNotification = async(req,res,next)=>{
-    const notification = await notificationModel.getNotificationByidNotification(req.body.idNotification)
+    const notification = req.notification    
     const idUserByAuth = req.user.id    
     if(idUserByAuth != notification.idTarget){
         return res.status(403).json({msg:"Identidade não autorizada"})
